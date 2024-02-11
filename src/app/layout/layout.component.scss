@@ -1,0 +1,18 @@
+#layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+title-bar {
+    display: flex;
+    padding: 5px 0;
+    background-color: var(--background-contrast);
+}
+
+nav-bar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--background-contrast);
+}

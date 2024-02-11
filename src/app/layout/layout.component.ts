@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 @Component({
   selector: 'app-layout',
@@ -10,6 +11,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule
     , RouterModule
+    , SharedModule
   ]
 })
 export class LayoutComponent implements OnInit {

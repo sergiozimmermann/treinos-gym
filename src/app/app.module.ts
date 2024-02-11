@@ -7,6 +7,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment.development';
 import { RouterModule } from '@angular/router';
 import { ComponentsModule } from './Utils/components/components.module';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import { ComponentsModule } from './Utils/components/components.module';
     , AngularFireModule.initializeApp(environment.firebase)
     , ComponentsModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
