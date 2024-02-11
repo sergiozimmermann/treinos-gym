@@ -1,0 +1,19 @@
+:host {
+    ::ng-deep {
+        .login {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .usuarios {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 80px
+        }
+    }
+}

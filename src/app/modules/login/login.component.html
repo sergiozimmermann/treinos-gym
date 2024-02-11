@@ -1,0 +1,9 @@
+<div class="login">
+  <h2>Selecione o Usuário</h2>
+
+  <div class="usuarios">
+    <ng-container *ngFor="let usuario of usuarios">
+      <app-card-usuario [usuario]="usuario" (usuarioSelecionado)="logar($event)"></app-card-usuario>
+    </ng-container>
+  </div>
+</div>

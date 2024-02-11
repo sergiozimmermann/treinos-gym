@@ -6,6 +6,11 @@ const config: CapacitorConfig = {
   webDir: 'dist/treinos-gym/browser',
   server: {
     androidScheme: 'https'
+  },
+  plugins: {
+    CapacitorCookies: {
+      enabled: true
+    }
   }
 };
 

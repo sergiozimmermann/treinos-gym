@@ -5,15 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment.development';
+import { RouterModule } from '@angular/router';
+import { ComponentsModule } from './Utils/components/components.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    BrowserModule
+    , RouterModule
+    , AppRoutingModule
+    , AngularFireModule.initializeApp(environment.firebase)
+    , ComponentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
