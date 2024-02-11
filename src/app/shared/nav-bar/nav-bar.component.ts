@@ -16,7 +16,8 @@ export class NavBarComponent implements OnInit {
 
   openDialog() {
     const dialogRef = this.dialog.open(MenuDialogComponent, {
-      width: '100%'
+      id: 'menu-dialog'
+      , width: '100%'
       , maxWidth: '100%'
     });
   }
