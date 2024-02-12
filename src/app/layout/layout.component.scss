@@ -6,7 +6,6 @@
 
 title-bar {
     display: flex;
-    padding: 5px;
     background-color: var(--background-contrast);
 }
 
@@ -15,4 +14,9 @@ nav-bar {
     bottom: 0;
     width: 100%;
     background-color: var(--background-contrast);
+}
+
+.card {
+    padding: 5px;
+    height: calc(100% - 70px - 42px - 10px); // 70px da navbar e 42px do titlebar e 10px do padding 5 do card
 }
