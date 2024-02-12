@@ -32,6 +32,54 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+// Estilos de classe global
+
+.flex {
+    display: flex !important;
+}
+
+.flex-row {
+    flex-direction: row !important;
+}
+
+.flex-column {
+    flex-direction: column !important;
+}
+
+.justify-content-center {
+    justify-content: center !important;
+}
+
+.justify-content-end {
+    justify-content: flex-end !important;
+}
+
+.align-items-start {
+    align-items: start !important;
+}
+
+.align-items-center {
+    align-items: center !important;
+}
+
+.align-items-end {
+    align-items: flex-end !important;
+}
+
+.align-self-start {
+    align-self: start !important;
+}
+
+.align-self-center {
+    align-self: center !important;
+}
+
+.align-self-end {
+    align-self: flex-end !important;
+}
+
+//
+
 button {
     background-color: var(--button-color) !important;
     color: var(--font-color) !important;
@@ -72,18 +120,6 @@ input[type="checkbox"] {
         font-size: 16px;
         color: #fff !important;
     }
-}
-
-.flex {
-    display: flex !important;
-}
-
-.flex-row {
-    flex-direction: row !important;
-}
-
-.flex-column {
-    flex-direction: column !important;
 }
 
 #menu-dialog {

@@ -1,0 +1,35 @@
+:host {
+    ::ng-deep {
+        .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+            background-color: var(--button-color) !important;
+        }
+
+        .mdc-floating-label,
+        .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input,
+        .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+            color: var(--font-color) !important;
+            caret-color: var(--font-color) !important;
+        }
+
+        .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+            border-bottom-color: var(--font-color) !important;
+        }
+
+        .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-floating-label {
+            color: var(--mdc-filled-text-field-error-hover-label-text-color) !important;
+        }
+
+        .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-text-field__input {
+            caret-color: var(--mdc-filled-text-field-error-caret-color) !important;
+        }
+
+        .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-floating-label,
+        .mdc-text-field--filled.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-floating-label--float-above {
+            color: var(--mdc-filled-text-field-error-hover-label-text-color) !important;
+        }
+
+        .botaoSalvar {
+            padding: 25px;
+        }
+    }
+}

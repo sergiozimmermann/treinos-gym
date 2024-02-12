@@ -1,3 +1,9 @@
-<p>
-  conta works!
-</p>
+<form [formGroup]="formulario" class="flex flex-column" (ngSubmit)="salvarUsuario()">
+  <mat-form-field>
+    <mat-label>Nome</mat-label>
+    <input class="inputNome" matInput formControlName="nmUsuario">
+  </mat-form-field>
+  <div class="align-self-end">
+    <button mat-button class="botaoSalvar" type="submit">Salvar</button>
+  </div>
+</form>
