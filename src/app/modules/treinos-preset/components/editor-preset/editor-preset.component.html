@@ -1,0 +1,14 @@
+<div class="botoes-acao">
+  <div class="descartar">
+    <button mat-button class="warn" (click)="onSalvarOuCancelar.emit()">Cancelar</button>
+  </div>
+  <div class="salvar">
+    <button mat-button (click)="salvarPreset()">Salvar</button>
+  </div>
+</div>
+<div class="nmPreset">
+  {{presetAtual?.nmPreset}}
+</div>
+<div class="listaExPreset">
+  <app-lista-exercicios-preset #ListaExericiosPreset [idPreset]="presetAtual?.id"></app-lista-exercicios-preset>
+</div>

@@ -2,14 +2,6 @@
   <app-historico-preset (onSelecionarPreset)="abrirPreset($event)"></app-historico-preset>
 </div>
 
-<div *ngIf="isOpen">
-  <div class="descartar" (click)="isOpen = false">
-    cancelar
-  </div>
-  <div class="salvar" (click)="isOpen = false">
-    salvar
-  </div>
-  <div class="nmPreset">
-    {{presetAtual?.nmPreset}}
-  </div>
+<div class="editorPreset" *ngIf="isOpen">
+  <app-editor-preset [presetAtual]="presetAtual" (onSalvarOuCancelar)="isOpen = false"></app-editor-preset>
 </div>

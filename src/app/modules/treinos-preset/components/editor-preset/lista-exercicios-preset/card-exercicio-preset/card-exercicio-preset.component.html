@@ -1,0 +1,30 @@
+<form [formGroup]="formulario" class="cardExercicio flex flex-column">
+    <div class="form-group">
+        <label>Nome Exercício</label>
+        <input type="text" formControlName="nmExercicio" (change)="onChangeInputs()">
+    </div>
+    <div class="form-group">
+        <label>Obs.</label>
+        <textarea formControlName="obsExercicio" (change)="onChangeInputs()"></textarea>
+    </div>
+    <div class="form-group flex flex-row" style="column-gap: 10px">
+        <div>
+            <label>Qtd. Séries</label>
+            <input type="number" formControlName="qtdSerie" (change)="onChangeInputs()">
+        </div>
+        <div class="form-group flex flex-row" style="column-gap: 10px;">
+            <div>
+                <label>Min. Rep.</label>
+                <input type="number" formControlName="minRep" (change)="onChangeInputs()">
+            </div>
+            <div>
+                <label>Max. Rep.</label>
+                <input type="number" formControlName="maxRep" (change)="onChangeInputs()">
+            </div>
+        </div>
+    </div>
+    <div>
+        <button mat-button class="w-full warn" style="margin-top: 10px;"
+            (click)="onDeleteExercicio.emit()">Deletar</button>
+    </div>
+</form>
