@@ -1,0 +1,5 @@
+<ng-container *ngFor="let preset of treinosPreset">
+  <div class="cardPreset" (click)="onSelecionarPreset.emit(preset)">
+    <app-card-preset [preset]="preset"></app-card-preset>
+  </div>
+</ng-container>

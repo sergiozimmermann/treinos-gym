@@ -1,0 +1,19 @@
+:host {
+    ::ng-deep {
+        .nmPreset {
+            text-align: center;
+        }
+
+        .descartar {
+            position: absolute;
+            bottom: calc(70px + 5px); // 70px do height do navbar e 5px do padding do card
+            left: 5px; // 5px do padding do card
+        }
+
+        .salvar {
+            position: absolute;
+            bottom: calc(70px + 5px); // 70px do height do navbar e 5px do padding do card
+            right: 5px; // 5px do padding do card
+        }
+    }
+}

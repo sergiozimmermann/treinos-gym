@@ -22,11 +22,8 @@ export class ContaService {
       updateProfile(usuarioAuth, { displayName: usuario.nmUsuario }).then(() => {
 
         // Se tiver sucesso, atualiza o Usuário do Firestore
-        this.afs.collection('Usuarios').snapshotChanges().subscribe(res => {
-          const usuarios = Utils.mapResFirebase(res);
-
-          // Filtro para achar o id do usuário do Firestore baseado no uid do FireAuth
-          const id = usuarios.find((user: any) => user.uid === usuario.uid)?.id;
+        this.afs.collection('Usuarios', ref => ref.where('uid', '==', usuario.uid)).snapshotChanges().subscribe(res => {
+          const id = Utils.mapResFirebase(res)[0].id;
 
           // Função para atualizar o usuário do Firestore
           this.afs.doc('Usuarios/' + id).update(usuario).then(() => {
@@ -35,7 +32,6 @@ export class ContaService {
         });
       }).catch(() => reject());
     });
-
   }
 
 }

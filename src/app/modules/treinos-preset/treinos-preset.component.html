@@ -1,3 +1,15 @@
-<p>
-  treinos-preset works!
-</p>
+<div [ngClass]="{'display-none': isOpen}">
+  <app-historico-preset (onSelecionarPreset)="abrirPreset($event)"></app-historico-preset>
+</div>
+
+<div *ngIf="isOpen">
+  <div class="descartar" (click)="isOpen = false">
+    cancelar
+  </div>
+  <div class="salvar" (click)="isOpen = false">
+    salvar
+  </div>
+  <div class="nmPreset">
+    {{presetAtual?.nmPreset}}
+  </div>
+</div>
