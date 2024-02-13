@@ -65,7 +65,7 @@ export class ListaExerciciosPresetComponent implements OnInit {
   }
 
   removerExPreset(idExercicioPreset: string) {
-    this.presetService.deletaExercicioPreset(idExercicioPreset).then(() => {
+    this.presetService.deletarExercicioPreset(idExercicioPreset).then(() => {
       this.exerciciosPreset = this.exerciciosPreset.filter(exercicio => exercicio.id !== idExercicioPreset);
       this.toastService.showMensagem('Deletado com Sucesso!');
     }).catch(() => this.toastService.showMensagem('Ocorreu um erro!'));

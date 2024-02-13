@@ -1,4 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { TreinosPresetService } from '../../../../services/treinos-preset.service';
+import { ToastService } from '../../../../../../Utils/services/toast/toast.service';
+import { TreinoPreset } from '../../../../models/TreinoPreset';
+import { UsuarioService } from '../../../../../../shared/services/usuario.service';
 
 @Component({
   selector: 'app-lista-preset',
@@ -7,13 +11,33 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class ListaPresetComponent implements OnInit {
 
-  @Input() treinosPreset: any[] = [];
+  @Input() treinosPreset: TreinoPreset[] = [];
 
   @Output() onSelecionarPreset = new EventEmitter();
 
-  constructor() { }
+  constructor(private presetService: TreinosPresetService
+    , private usuarioService: UsuarioService
+    , private toastService: ToastService) { }
 
   ngOnInit() {
+  }
+
+  adicionarPreset() {
+    this.usuarioService.getIdUsuario().then(idUsuario => {
+      const preset = new TreinoPreset();
+      preset.idUsuario = idUsuario;
+      this.presetService.addPreset(preset).then(() => {
+        this.toastService.showMensagem('Adicionado com sucesso!');
+      }).catch(() => this.toastService.showMensagem('Ocorreu um erro!'));
+    });
+  }
+
+  deletarPreset(idPreset: string) {
+    this.presetService.deletarPreset(idPreset).then(() => {
+      this.toastService.showMensagem('Deletado com sucesso!');
+    }).catch(() => {
+      this.toastService.showMensagem('Ocorreu um erro!');
+    });
   }
 
 }

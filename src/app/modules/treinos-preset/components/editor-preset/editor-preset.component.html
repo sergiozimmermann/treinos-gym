@@ -7,7 +7,12 @@
   </div>
 </div>
 <div class="nmPreset">
-  {{presetAtual?.nmPreset}}
+  <input mat-input type="text" [(ngModel)]="presetAtual.nmPreset" placeholder="Nome Treino"
+    (change)="needAtualizarPreset = true">
+</div>
+<div class="text-center">
+  <input mat-input class="divPreset" type="text" [(ngModel)]="presetAtual.divPreset" placeholder="Divisão Treino"
+    (change)="needAtualizarPreset = true">
 </div>
 <div class="listaExPreset">
   <app-lista-exercicios-preset #ListaExericiosPreset [idPreset]="presetAtual?.id"></app-lista-exercicios-preset>

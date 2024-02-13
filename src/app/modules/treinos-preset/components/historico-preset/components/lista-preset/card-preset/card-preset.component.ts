@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 class Preset {
   idPreset?: string;
@@ -14,6 +14,8 @@ class Preset {
 export class CardPresetComponent implements OnInit {
 
   @Input() preset: Preset = new Preset();
+
+  @Output() deletarPreset = new EventEmitter();
 
   constructor() { }
 
