@@ -15,6 +15,7 @@ import { PreviewTreinoPresetComponent } from './components/editor-treino-diario/
 import { TreinoDiarioAtualComponent } from './components/editor-treino-diario/components/treino-diario-atual/treino-diario-atual.component';
 import { ListaExercicioAtualComponent } from './components/editor-treino-diario/components/treino-diario-atual/lista-exercicio-atual/lista-exercicio-atual.component';
 import { CardExercicioAtualComponent } from './components/editor-treino-diario/components/treino-diario-atual/lista-exercicio-atual/card-exercicio-atual/card-exercicio-atual.component';
+import { MatDatepickerModule } from "@angular/material/datepicker";
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { CardExercicioAtualComponent } from './components/editor-treino-diario/c
     , FormsModule
     , ReactiveFormsModule
     , ComponentsModule
+    , MatDatepickerModule
   ],
   declarations: [
     TreinosDiariosComponent

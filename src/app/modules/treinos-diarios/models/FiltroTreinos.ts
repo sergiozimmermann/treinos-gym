@@ -1,5 +1,5 @@
 export class FiltroTreinos {
     nmTreino: string = '';
-    dtTreinoIni!: string;
-    dtTreinoFim!: string;
+    dtTreinoIni!: Date;
+    dtTreinoFim!: Date;
 }

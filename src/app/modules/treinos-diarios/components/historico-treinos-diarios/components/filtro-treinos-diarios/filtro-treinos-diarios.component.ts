@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FiltroTreinos } from '../../../../models/FiltroTreinos';
 
 @Component({
   selector: 'app-filtro-treinos-diarios',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FiltroTreinosDiariosComponent implements OnInit {
 
+  filtro: FiltroTreinos = new FiltroTreinos();
+
+  @Output() onFiltrar = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  filtrar() {
+    this.onFiltrar.emit(this.filtro);
   }
 
 }

@@ -194,6 +194,28 @@ input[type="checkbox"] {
     background-color: var(--button-color) !important;
 }
 
-.mat-mdc-option {
+.mat-mdc-option,
+.mat-calendar-body-cell-content,
+.mat-calendar-body-label,
+.mat-calendar-table-header th {
     color: var(--font-color) !important;
+}
+
+.mat-datepicker-content {
+    background-color: var(--button-color) !important;
+    color: var(--font-color) !important;
+}
+
+.mat-calendar-controls {
+    .mat-calendar-period-button {
+        background-color: var(--background) !important;
+    }
+}
+
+.mat-calendar-arrow {
+    fill: var(--font-color) !important;
+}
+
+.mat-calendar-body-today:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+    border-color: var(--mat-datepicker-calendar-date-selected-state-background-color) !important;
 }
