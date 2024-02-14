@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Combo } from '../../Utils/components/dropdown/models/combo';
 
 @Component({
   selector: 'app-treinos-diarios',

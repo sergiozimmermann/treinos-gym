@@ -1,0 +1,10 @@
+<div class="dropdownDiv">
+  <mat-form-field class="w-full">
+    <mat-label>{{label}}</mat-label>
+    <mat-select [(value)]="selectedValue">
+      @for (item of combo; track item) {
+      <mat-option [value]="item.value">{{item.label}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>

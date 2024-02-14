@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 
@@ -8,8 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class TreinosPresetService {
 
-  constructor(private afs: AngularFirestore
-    , private afAuth: AngularFireAuth) { }
+  constructor(private afs: AngularFirestore) { }
 
   getTreinosPreset(idUsuario: string): Observable<any> {
     return this.afs.collection('Treinos_Preset', ref => ref.where('idUsuario', '==', idUsuario).orderBy('divPreset')).snapshotChanges();
