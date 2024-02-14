@@ -24,18 +24,18 @@ export class EditorPresetComponent implements OnInit {
   ngOnInit() {
   }
 
-  salvarPreset() {
+  salvarPreset(naoFecharPagina?: boolean) {
     this.ListaExericiosPreset.atualizarExerciciosPreset().then(() => {
       if (this.needAtualizarPreset) {
         this.presetService.atualizarPreset(this.presetAtual).then(() => {
-          this.onSalvarOuCancelar.emit();
+          if (!naoFecharPagina) this.onSalvarOuCancelar.emit();
           this.toastService.showMensagem('Salvo com sucesso!');
         }).catch(() => {
           this.toastService.showMensagem('Ocorreu um erro!');
         });
       }
       else {
-        this.onSalvarOuCancelar.emit();
+        if (!naoFecharPagina) this.onSalvarOuCancelar.emit();
         this.toastService.showMensagem('Salvo com sucesso!');
       }
     }).catch(() => {

@@ -14,13 +14,15 @@ export class TreinosPresetService {
   }
 
   addPreset(preset: any): Promise<any> {
-    preset.dtCriacao = new Date();
     preset = JSON.parse(JSON.stringify(preset));
+    delete preset.id;
     return this.afs.collection('Treinos_Preset').add(preset);
   }
 
   atualizarPreset(preset: any): Promise<any> {
-    return this.afs.collection('Treinos_Preset').doc(preset.id).update(preset);
+    const idPreset: string = preset.id;
+    delete preset.id;
+    return this.afs.collection('Treinos_Preset').doc(idPreset).update(preset);
   }
 
   deletarPreset(idPreset: string) {

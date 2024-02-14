@@ -15,5 +15,6 @@
     placeholder="Divisão Treino" (change)="needAtualizarPreset = true">
 </div>
 <div class="listaExPreset">
-  <app-lista-exercicios-preset #ListaExericiosPreset [idPreset]="presetAtual?.id"></app-lista-exercicios-preset>
+  <app-lista-exercicios-preset #ListaExericiosPreset [idPreset]="presetAtual?.id"
+    (salvarPreset)="salvarPreset($event)"></app-lista-exercicios-preset>
 </div>

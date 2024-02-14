@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChildren } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChildren } from '@angular/core';
 import { TreinosPresetService } from '../../../services/treinos-preset.service';
 import Utils from '../../../../../Utils/Utils';
 import { ExercicioPreset } from '../../../models/ExercicioPreset';
@@ -27,6 +27,8 @@ export class ListaExerciciosPresetComponent implements OnInit {
     }
   }
 
+  @Output() salvarPreset = new EventEmitter();
+
   constructor(private presetService: TreinosPresetService
     , private toastService: ToastService) { }
 
@@ -40,6 +42,7 @@ export class ListaExerciciosPresetComponent implements OnInit {
   }
 
   addExercicioPreset() {
+    this.salvarPreset.emit(true);
     const preset = new ExercicioPreset();
     preset.idPreset = this.idPreset;
     this.presetService.addExercicioPreset(preset as any).then(() => {
