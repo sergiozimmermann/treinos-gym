@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TreinosPresetComponent } from './treinos-preset.component';
-import { RouterModule } from '@angular/router';
 import { HistoricoPresetComponent } from './components/historico-preset/historico-preset.component';
 import { ListaPresetComponent } from './components/historico-preset/components/lista-preset/lista-preset.component';
 import { CardPresetComponent } from './components/historico-preset/components/lista-preset/card-preset/card-preset.component';
@@ -11,11 +10,12 @@ import { CardExercicioPresetComponent } from './components/editor-preset/lista-e
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TreinosPresetRoutingModule } from './treinos-preset-routing.module';
 
 @NgModule({
   imports: [
     CommonModule
-    , RouterModule.forChild([{ path: '', component: TreinosPresetComponent }])
+    , TreinosPresetRoutingModule
     , MatButtonModule
     , MatInputModule
     , FormsModule
@@ -29,6 +29,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     , EditorPresetComponent
     , ListaExerciciosPresetComponent
     , CardExercicioPresetComponent
-  ]
+  ],
+  exports: [ListaExerciciosPresetComponent]
 })
 export class TreinosPresetModule { }

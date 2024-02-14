@@ -29,7 +29,11 @@
     height: calc(100% - 36px - 27px); // 36px dos botões de ação e 27px do nome do treino
 }
 
-.divPreset {
+#nmPreset {
+    width: 90%;
+}
+
+#divPreset {
     max-width: 140px;
     margin-top: 5px;
 }
