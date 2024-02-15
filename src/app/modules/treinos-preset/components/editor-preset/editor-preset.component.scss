@@ -4,7 +4,7 @@
     position: absolute;
     bottom: 0;
     width: calc(100% - 5px);
-    height: 36px;
+    height: 40px;
 }
 
 .nmPreset {
@@ -13,20 +13,21 @@
 
 .descartar {
     position: absolute;
-    bottom: 0;
+    bottom: 4px;
     left: 5px; // 5px do padding do card
 }
 
 .salvar {
     position: absolute;
-    bottom: 0;
+    bottom: 4px;
     right: 5px; // 5px do padding do card
 }
 
 .listaExPreset {
     position: relative;
     overflow-y: auto;
-    height: calc(100% - 36px - 27px); // 36px dos botões de ação e 27px do nome do treino
+    margin-top: 5px;
+    height: calc(100% - 40px - 69px - 5px); // 40px dos botões de ação, 69px do nome do treino e divisão treino e 5px do margin-top
 }
 
 #nmPreset {

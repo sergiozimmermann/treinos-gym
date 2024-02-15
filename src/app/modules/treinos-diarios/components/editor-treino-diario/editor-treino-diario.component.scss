@@ -1,0 +1,33 @@
+.botoes-acao {
+    z-index: 100;
+    background-color: var(--background);
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 5px);
+    height: 40px;
+}
+
+.nmTreino {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.descartar {
+    position: absolute;
+    bottom: 4px;
+    left: 5px; // 5px do padding do card
+}
+
+.salvar {
+    position: absolute;
+    bottom: 4px;
+    right: 5px; // 5px do padding do card
+}
+
+.treinoAtual {
+    position: relative;
+    overflow-y: auto;
+    margin-top: 5px;
+    height: calc(100% - 40px - 98px - 5px); // 40px dos botões de ação e 98px do nome do treino e 5px do margin-top
+}

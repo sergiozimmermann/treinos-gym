@@ -1,8 +1,8 @@
 <mat-form-field class="w-full">
   <mat-label>{{label}}</mat-label>
-  <input matInput [matDatepicker]="picker" (click)="picker.open()" [(ngModel)]="data">
+  <input matInput [matDatepicker]="picker" (click)="picker.open()" [(ngModel)]="data" (change)="onChangeData.emit()">
   <mat-datepicker #picker></mat-datepicker>
-  <ng-container *ngIf="data">
+  <ng-container *ngIf="data && data !== ''">
     <span class="clearData" (click)="data = null">x</span>
   </ng-container>
 </mat-form-field>

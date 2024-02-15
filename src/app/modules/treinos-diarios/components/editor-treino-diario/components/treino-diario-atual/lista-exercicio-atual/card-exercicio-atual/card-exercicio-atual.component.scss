@@ -1,0 +1,61 @@
+:host {
+    ::ng-deep {
+        .cardExercicio {
+            border: 3px solid var(--background-contrast);
+            border-radius: 10px;
+            padding: 10px;
+        }
+    }
+}
+
+.inputsExercicio {
+    column-gap: 10px;
+}
+
+input[type="number"] {
+    margin-left: 10px;
+    text-align: right;
+}
+
+.pesoKg {
+    label {
+        min-width: 92px;
+    }
+
+    input {
+        min-width: 34px;
+    }
+}
+
+.qtdRep {
+    label {
+        min-width: 81px;
+    }
+
+    input {
+        min-width: 34px;
+    }
+}
+
+.pesoAndRep {
+    row-gap: 5px;
+    margin-top: 5px;
+}
+
+.nmExercicio {
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.obsExercicio {
+    border: 1px solid var(--font-color);
+    padding: 0 5px 5px 5px;
+
+    span {
+        font-size: 20px;
+    }
+}
+
+.rangeRep {
+    margin-top: 5px;
+}

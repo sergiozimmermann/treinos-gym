@@ -1,8 +1,8 @@
-<ng-container *ngFor="let preset of treinosPreset">
-  <div class="cardPreset" (click)="onSelecionarPreset.emit({preset: preset, click: $event})">
-    <app-card-preset [preset]="preset" (deletarPreset)="deletarPreset(preset.id)"></app-card-preset>
-  </div>
-</ng-container>
+@for (preset of treinosPreset; track preset) {
+<div class="cardPreset" (click)="onSelecionarPreset.emit({preset: preset, click: $event})">
+  <app-card-preset [preset]="preset" (deletarPreset)="deletarPreset(preset.id)"></app-card-preset>
+</div>
+}
 
 <div>
   <button mat-button class="w-full" (click)="adicionarPreset()">Adicionar Preset</button>

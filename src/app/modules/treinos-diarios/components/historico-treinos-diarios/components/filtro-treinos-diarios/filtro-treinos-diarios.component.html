@@ -1,4 +1,4 @@
-<div>
+<div (keyup.enter)="filtrar()">
   <div class="form-group">
     <label for="nmTreino">Nome Treino</label>
     <input id="nmTreino" type="text" [(ngModel)]="filtro.nmTreino">
@@ -13,5 +13,8 @@
   </div>
   <div class="filtrar">
     <button mat-button class="w-full" (click)="filtrar()">Filtrar</button>
+  </div>
+  <div class="flex justify-content-end addTreino">
+    <button mat-button class="secondary" (click)="addTreino()">Adicionar Treino</button>
   </div>
 </div>

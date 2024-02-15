@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { TreinosDiariosService } from '../../../../services/treinos-diarios.service';
 import { FiltroTreinos } from '../../../../models/FiltroTreinos';
 import { UsuarioService } from '../../../../../../shared/services/usuario.service';
@@ -13,6 +13,8 @@ export class ListaTreinosDiariosComponent implements OnInit {
 
   treinosDiarios: any[] = [];
 
+  @Output() onSelecionarTreino = new EventEmitter();
+
   constructor(private treinoService: TreinosDiariosService
     , private usuarioService: UsuarioService) {
     this.getTreinosDiarios();
@@ -25,6 +27,7 @@ export class ListaTreinosDiariosComponent implements OnInit {
     this.usuarioService.getIdUsuario().then(idUsuario => {
       this.treinoService.getTreinos(idUsuario, filtro).subscribe(res => {
         const resFormatado = Utils.mapResFirebase(res);
+        resFormatado.map(treino => treino.dtTreino = new Date(treino.dtTreino.seconds * 1000));
         if (filtro && filtro.nmTreino !== '') {
           this.treinosDiarios = resFormatado.filter(treino => treino.nmTreino.toLowerCase().includes(filtro.nmTreino.toLowerCase()));
           return;

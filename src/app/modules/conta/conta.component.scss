@@ -31,5 +31,13 @@
         .botaoSalvar {
             padding: 25px;
         }
+
+        .mat-mdc-form-field-subscript-wrapper {
+            display: none !important;
+        }
+
+        #salvar {
+            margin-top: 10px;
+        }
     }
 }

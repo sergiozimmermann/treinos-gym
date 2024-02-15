@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-treino-diario-atual',
@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./treino-diario-atual.component.scss']
 })
 export class TreinoDiarioAtualComponent implements OnInit {
+
+  @Input() treinoAtual: any;
+
+  @Output() salvarTreino = new EventEmitter();
 
   constructor() { }
 

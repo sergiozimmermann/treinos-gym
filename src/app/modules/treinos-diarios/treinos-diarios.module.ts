@@ -16,6 +16,9 @@ import { TreinoDiarioAtualComponent } from './components/editor-treino-diario/co
 import { ListaExercicioAtualComponent } from './components/editor-treino-diario/components/treino-diario-atual/lista-exercicio-atual/lista-exercicio-atual.component';
 import { CardExercicioAtualComponent } from './components/editor-treino-diario/components/treino-diario-atual/lista-exercicio-atual/card-exercicio-atual/card-exercicio-atual.component';
 import { MatDatepickerModule } from "@angular/material/datepicker";
+import { AddTreinoDialogComponent } from './components/add-treino-dialog/add-treino-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   imports: [
@@ -27,6 +30,8 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
     , ReactiveFormsModule
     , ComponentsModule
     , MatDatepickerModule
+    , MatDialogModule
+    , MatDividerModule
   ],
   declarations: [
     TreinosDiariosComponent
@@ -39,6 +44,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
     , TreinoDiarioAtualComponent
     , ListaExercicioAtualComponent
     , CardExercicioAtualComponent
+    , AddTreinoDialogComponent
   ]
 })
 export class TreinosDiariosModule { }

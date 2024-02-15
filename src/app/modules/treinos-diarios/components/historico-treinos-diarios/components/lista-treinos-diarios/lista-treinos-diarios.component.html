@@ -1,8 +1,5 @@
 @for (treino of treinosDiarios; track treino) {
-<div>
-  {{treino.nmTreino}}
-</div>
-<div>
-  {{treino?.dtTreino?.seconds * 1000 | date: 'dd/MM/yyyy'}}
+<div class="cardBox" (click)="onSelecionarTreino.emit(treino)">
+  <app-card-treino-diario [treino]="treino"></app-card-treino-diario>
 </div>
 }

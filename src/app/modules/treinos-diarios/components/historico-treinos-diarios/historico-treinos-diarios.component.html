@@ -1,3 +1,7 @@
-<app-filtro-treinos-diarios (onFiltrar)="ListaTreinosDiarios?.getTreinosDiarios($event)"></app-filtro-treinos-diarios>
+<app-filtro-treinos-diarios (onFiltrar)="ListaTreinosDiarios?.getTreinosDiarios($event)"
+    (adicionarTreino)="adicionarTreino.emit()"></app-filtro-treinos-diarios>
 
-<app-lista-treinos-diarios #ListaTreinosDiarios></app-lista-treinos-diarios>
+<div style="margin-top: 10px;">
+    <app-lista-treinos-diarios #ListaTreinosDiarios
+        (onSelecionarTreino)="onSelecionarTreino.emit($event)"></app-lista-treinos-diarios>
+</div>

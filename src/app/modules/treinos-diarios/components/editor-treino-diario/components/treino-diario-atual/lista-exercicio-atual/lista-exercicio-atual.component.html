@@ -1,3 +1,6 @@
-<p>
-  lista-exercicio-atual works!
-</p>
+<div class="flex flex-column listaExercicio">
+  @for (exercicio of exerciciosTreino; track $index) {
+  <app-card-exercicio-atual [exercicio]="exercicio"
+    (exercicioChange)="exerciciosTreino[$index] = $event"></app-card-exercicio-atual>
+  }
+</div>

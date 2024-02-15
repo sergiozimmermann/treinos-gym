@@ -14,11 +14,13 @@ export class CalendarioComponent implements OnInit {
     return this._data;
   }
   @Input() set data(data: any) {
-    if (this._data === data) return;
+    if (data === undefined || this._data === data) return;
     this._data = data;
     this.dataChange.emit(data);
   }
   @Output() dataChange = new EventEmitter();
+
+  @Output() onChangeData = new EventEmitter();
 
   constructor() { }
 

@@ -1,3 +1,28 @@
-<p>
-  card-exercicio-atual works!
-</p>
+<div class="cardExercicio">
+  <div class="nmExercicio">
+    <span>{{exercicio.nmExercicio}}</span>
+  </div>
+  <div class="obsExercicio">
+    <span>Obs: {{exercicio.obsExercicio}}</span>
+  </div>
+  <div class="flex justify-content-end rangeRep">
+    <label>Range Rep: </label>
+    <span style="width: 95px; text-align: end;">{{exercicio.minMaxRep}}</span>
+  </div>
+  <div class="pesoAndRep flex flex-column">
+    @for (item of getRange(exercicio.qtdSerie); track $index) {
+    <div class="flex inputsExercicio">
+      <div class="flex pesoKg">
+        <label [for]="'pesoKg' + $index">Peso (Kg):</label>
+        <input #InputPesoKg [id]="'pesoKg' + $index" type="number" [(ngModel)]="exercicio.pesoKg[$index]"
+          [placeholder]="0" (focus)="InputPesoKg.select()">
+      </div>
+      <div class="flex qtdRep">
+        <label [for]="'qtdRep' + $index">Qtd. Rep:</label>
+        <input #InputQtdRep [id]="'qtdRep' + $index" type="number" [(ngModel)]="exercicio.qtdRep[$index]"
+          [placeholder]="0" (focus)="InputQtdRep.select()">
+      </div>
+    </div>
+    }
+  </div>
+</div>

@@ -43,4 +43,12 @@ export class TreinosDiariosService {
     }
   }
 
+  getDadosExPreset(idTreinoPreset: string): Observable<any> {
+    return this.afs.collection('Exercicios_Preset', ref => ref.where('idPreset', '==', idTreinoPreset)).snapshotChanges();
+  }
+
+  getExerciciosTreino(idTreino: string): Observable<any> {
+    return this.afs.collection('Exercicios_Diarios', ref => ref.where('idTreino', '==', idTreino)).snapshotChanges();
+  }
+
 }

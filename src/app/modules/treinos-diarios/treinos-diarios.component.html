@@ -1,1 +1,9 @@
-<app-historico-treinos-diarios></app-historico-treinos-diarios>
+<div [ngClass]="{'display-none': isOpen}">
+    <app-historico-treinos-diarios (adicionarTreino)="showAddTreino()"
+        (onSelecionarTreino)="selecionarTreino($event)"></app-historico-treinos-diarios>
+</div>
+
+<div class="editorTreino" *ngIf="isOpen">
+    <app-editor-treino-diario [treinoAtual]="treinoAtual"
+        (onSalvarOuCancelar)="isOpen = false"></app-editor-treino-diario>
+</div>
