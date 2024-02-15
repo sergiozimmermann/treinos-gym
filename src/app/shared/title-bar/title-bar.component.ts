@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'title-bar',
@@ -13,9 +14,15 @@ export class TitleBarComponent implements OnInit {
   nmUsuario: string = '';
 
   constructor(private afAuth: AngularFireAuth
-    , private location: Location) {
+    , private location: Location
+    , private router: Router) {
     this.getNomeUsuario();
-    this.getTitle();
+
+    router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.getTitle();
+      }
+    });
   }
 
   ngOnInit() {
@@ -32,7 +39,6 @@ export class TitleBarComponent implements OnInit {
     if (title.charAt(0) === '#') {
       title = title.slice(1);
     }
-
     switch (title) {
       case '/treinos-diarios':
         this.titulo = 'Treinos Diários'
