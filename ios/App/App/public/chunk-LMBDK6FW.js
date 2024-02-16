@@ -1,0 +1,1 @@
+var r=class{static mapResFirebase(t){return t.map(a=>{let o=a.payload.doc.data();return o.id=a.payload.doc.id,o})}static montaCombo(t,a,o="id"){let d=[];return t.forEach(e=>{d.push({value:e[o],label:e[a]})}),d}};export{r as a};
