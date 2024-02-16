@@ -39,7 +39,7 @@ export class TreinosPresetService {
   }
 
   getExerciciosPreset(idPreset: string) {
-    return this.afs.collection('Exercicios_Preset', ref => ref.where('idPreset', '==', idPreset).orderBy('dtCriacao', 'desc')).snapshotChanges();
+    return this.afs.collection('Exercicios_Preset', ref => ref.where('idPreset', '==', idPreset).orderBy('dtCriacao')).snapshotChanges();
   }
 
   addExercicioPreset(preset: any): Promise<any> {
@@ -55,6 +55,10 @@ export class TreinosPresetService {
 
   deletarExercicioPreset(idExercicioPreset: string): Promise<any> {
     return this.afs.collection('Exercicios_Preset').doc(idExercicioPreset).delete();
+  }
+
+  getComboPresets(idUsuario: string) {
+    return this.afs.collection('Treinos_Preset', ref => ref.where('idUsuario', '==', idUsuario).orderBy('divPreset')).snapshotChanges();
   }
 
 }

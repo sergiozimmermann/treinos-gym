@@ -19,6 +19,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { AddTreinoDialogComponent } from './components/add-treino-dialog/add-treino-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
+import { TreinosPresetModule } from '../treinos-preset/treinos-preset.module';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { MatDividerModule } from '@angular/material/divider';
     , MatDatepickerModule
     , MatDialogModule
     , MatDividerModule
+    , TreinosPresetModule
   ],
   declarations: [
     TreinosDiariosComponent

@@ -1,0 +1,18 @@
+:host {
+    ::ng-deep {
+        .listaExPreset {
+            height: calc(100% - 65px - 20px - 37px); // 65px do dropdown, 20px do margin 10 0, 37px do botão iniciar
+            margin: 10px 0;
+            position: relative;
+        }
+
+        #scrollLista {
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .mat-mdc-dialog-content {
+            max-height: 80vh;
+        }
+    }
+}

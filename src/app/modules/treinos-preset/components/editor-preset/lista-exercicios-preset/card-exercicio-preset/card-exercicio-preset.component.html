@@ -1,29 +1,29 @@
 <form [formGroup]="formulario" class="cardExercicio flex flex-column">
     <div class="form-group">
         <label>Nome Exercício</label>
-        <input type="text" formControlName="nmExercicio" (change)="onChangeInputs()">
+        <input type="text" formControlName="nmExercicio" (change)="onChangeInputs()" [readonly]="readOnly">
     </div>
     <div class="form-group">
         <label>Obs.</label>
-        <textarea formControlName="obsExercicio" (change)="onChangeInputs()"></textarea>
+        <textarea formControlName="obsExercicio" (change)="onChangeInputs()" [readonly]="readOnly"></textarea>
     </div>
     <div class="form-group flex flex-row" style="column-gap: 10px">
         <div>
             <label>Qtd. Séries</label>
-            <input type="number" formControlName="qtdSerie" (change)="onChangeInputs()">
+            <input type="number" formControlName="qtdSerie" (change)="onChangeInputs()" [readonly]="readOnly">
         </div>
         <div class="form-group flex flex-row" style="column-gap: 10px;">
             <div>
                 <label>Min. Rep.</label>
-                <input type="number" formControlName="minRep" (change)="onChangeInputs()">
+                <input type="number" formControlName="minRep" (change)="onChangeInputs()" [readonly]="readOnly">
             </div>
             <div>
                 <label>Max. Rep.</label>
-                <input type="number" formControlName="maxRep" (change)="onChangeInputs()">
+                <input type="number" formControlName="maxRep" (change)="onChangeInputs()" [readonly]="readOnly">
             </div>
         </div>
     </div>
-    <div>
+    <div *ngIf="!readOnly">
         <button mat-button class="w-full warn" style="margin-top: 10px;"
             (click)="onDeleteExercicio.emit()">Deletar</button>
     </div>

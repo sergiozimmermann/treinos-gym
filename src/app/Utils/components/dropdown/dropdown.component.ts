@@ -20,12 +20,20 @@ export class DropdownComponent implements OnInit {
     if (this._selectedValue === selectedValue) return;
     this._selectedValue = selectedValue;
     this.selectedValueChange.emit(selectedValue);
+    this.selectedCombo.emit(this.getComboByValue(selectedValue));
   }
   @Output() selectedValueChange = new EventEmitter();
+
+  @Output() selectedCombo = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  getComboByValue(value: any) {
+    if (!value) return;
+    return this.combo.find(item => item.value === value);
   }
 
 }

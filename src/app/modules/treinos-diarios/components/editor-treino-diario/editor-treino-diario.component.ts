@@ -25,6 +25,28 @@ export class EditorTreinoDiarioComponent implements OnInit {
   }
 
   salvarTreino() {
+    if (this.treinoAtual.id) {
+      this.atualizarTreino();
+    }
+    else {
+      this.addTreino();
+    }
+  }
+
+  addTreino() {
+    this.treinoService.addTreinoDiario(this.treinoAtual).then(res => {
+      this.TreinoDiarioAtual.ListaExercicioAtual.addExerciciosDiarios(res.id).then(() => {
+        this.onSalvarOuCancelar.emit();
+        this.toastService.showMensagem('Salvo com sucesso!');
+      }).catch(() => {
+        this.toastService.showMensagem('Ocorreu um erro!');
+      })
+    }).catch(() => {
+      this.toastService.showMensagem('Ocorreu um erro!');
+    })
+  }
+
+  atualizarTreino() {
     this.TreinoDiarioAtual.ListaExercicioAtual.atualizarExerciciosDiarios().then(() => {
       if (this.needAtualizarTreino) {
         this.treinoService.atualizarTreinoDiario(this.treinoAtual).then(() => {

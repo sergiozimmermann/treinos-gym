@@ -1,11 +1,11 @@
 <div class="listaCards">
   <ng-container *ngFor="let exercicio of exerciciosPreset; index as i">
-    <app-card-exercicio-preset #CardExercicioPreset [exercicioPreset]="exercicio"
+    <app-card-exercicio-preset #CardExercicioPreset [readOnly]="readOnly" [exercicioPreset]="exercicio"
       (exercicioPresetChange)="exerciciosPreset[i] = $event"
       (onDeleteExercicio)="removerExPreset(exercicio.id)"></app-card-exercicio-preset>
   </ng-container>
 </div>
 
-<div class="botaoAddEx">
+<div class="botaoAddEx" *ngIf="!readOnly">
   <button mat-button class="w-full" (click)="addExercicioPreset()">Adicionar Exercício</button>
 </div>

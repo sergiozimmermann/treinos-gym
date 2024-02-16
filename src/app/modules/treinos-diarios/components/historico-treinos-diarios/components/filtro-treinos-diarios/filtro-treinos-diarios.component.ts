@@ -30,8 +30,4 @@ export class FiltroTreinosDiariosComponent implements OnInit {
     this.onFiltrar.emit(this.filtro);
   }
 
-  addTreino() {
-    this.adicionarTreino.emit();
-  }
-
 }

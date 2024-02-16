@@ -1,5 +1,16 @@
 <mat-dialog-content class="mat-typography">
   <div>
-    aaa
+    <dropdown label="Treino Predefinido" [combo]="comboPresets" [(selectedValue)]="idPreset"
+      (selectedCombo)="preset = $event"></dropdown>
+  </div>
+
+  <div class="listaExPreset">
+    <div id="scrollLista" *ngIf="showExerciciosPreset">
+      <app-lista-exercicios-preset [readOnly]="true" [idPreset]="idPreset"></app-lista-exercicios-preset>
+    </div>
+  </div>
+
+  <div *ngIf="idPreset">
+    <button mat-button class="w-full secondary" (click)="iniciarTreino()">Iniciar</button>
   </div>
 </mat-dialog-content>

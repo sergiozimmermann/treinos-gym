@@ -27,6 +27,8 @@ export class ListaExerciciosPresetComponent implements OnInit {
     }
   }
 
+  @Input() readOnly: boolean = false;
+
   @Output() salvarPreset = new EventEmitter();
 
   constructor(private presetService: TreinosPresetService
@@ -42,6 +44,7 @@ export class ListaExerciciosPresetComponent implements OnInit {
   }
 
   addExercicioPreset() {
+    if (this.readOnly) return; // Controle de segurança
     this.salvarPreset.emit(true);
     const preset = new ExercicioPreset();
     preset.idPreset = this.idPreset;
@@ -52,6 +55,7 @@ export class ListaExerciciosPresetComponent implements OnInit {
   }
 
   atualizaCadaExercicio(exercicio: any) {
+    if (this.readOnly) return; // Controle de segurança
     return new Promise<void>((resolve) => {
       this.presetService.atualizarExercicioPreset(exercicio).then(() => {
         resolve();
@@ -60,6 +64,9 @@ export class ListaExerciciosPresetComponent implements OnInit {
   }
 
   atualizarExerciciosPreset(): Promise<any> {
+    if (this.readOnly) {
+      return Promise.all([false]); // Controle de segurança
+    }
     const cardsComChange = this.CardsExercicioPreset._results.filter((component: CardExercicioPresetComponent) => component.cardChange === true);
     const exerciciosPresetForm = cardsComChange.map((component: CardExercicioPresetComponent) => component.formulario.getRawValue());
     const promises = exerciciosPresetForm.map((exercicio: any) => this.atualizaCadaExercicio(exercicio));
@@ -68,6 +75,7 @@ export class ListaExerciciosPresetComponent implements OnInit {
   }
 
   removerExPreset(idExercicioPreset: string) {
+    if (this.readOnly) return; // Controle de segurança
     this.presetService.deletarExercicioPreset(idExercicioPreset).then(() => {
       this.exerciciosPreset = this.exerciciosPreset.filter(exercicio => exercicio.id !== idExercicioPreset);
       this.toastService.showMensagem('Deletado com Sucesso!');

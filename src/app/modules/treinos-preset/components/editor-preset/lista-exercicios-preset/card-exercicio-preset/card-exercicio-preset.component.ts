@@ -24,6 +24,8 @@ export class CardExercicioPresetComponent implements OnInit {
     }
   }
 
+  @Input() readOnly: boolean = false;
+
   @Output() exercicioPresetChange = new EventEmitter();
   @Output() onDeleteExercicio = new EventEmitter();
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FiltroTreinos } from '../models/FiltroTreinos';
 import { Observable } from 'rxjs';
+import { TreinoAtual } from '../models/TreinoAtual';
 
 @Injectable({
   providedIn: 'root'
@@ -51,8 +52,21 @@ export class TreinosDiariosService {
     return this.afs.collection('Exercicios_Diarios', ref => ref.where('idTreino', '==', idTreino)).snapshotChanges();
   }
 
+  addExercicioDiario(exercicioTreino: any): Promise<any> {
+    const exercicio = JSON.parse(JSON.stringify(exercicioTreino));
+    delete exercicio.id;
+    return this.afs.collection('Exercicios_Diarios').add(exercicio);
+  }
+
   atualizarExercicioDiario(exercicio: any): Promise<void> {
     return this.afs.collection('Exercicios_Diarios').doc(exercicio.id).update(exercicio);
+  }
+
+  addTreinoDiario(treinoAtual: TreinoAtual): Promise<any> {
+    const treino = JSON.parse(JSON.stringify(treinoAtual));
+    delete treino.id;
+    treino.dtTreino = new Date(treino.dtTreino);
+    return this.afs.collection('Treinos_Diarios').add(treino);
   }
 
   atualizarTreinoDiario(treinoAtual: any) {

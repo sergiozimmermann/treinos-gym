@@ -1,3 +1,12 @@
-.cardBox {
-    cursor: pointer;
+:host {
+    ::ng-deep {
+        .listaTreinosDiarios {
+            margin-top: 10px;
+            row-gap: 5px;
+        }
+
+        .cardBox {
+            cursor: pointer;
+        }
+    }
 }

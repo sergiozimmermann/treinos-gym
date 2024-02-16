@@ -4,6 +4,7 @@ import Utils from '../../../../../../../Utils/Utils';
 import { TreinosPresetService } from '../../../../../../treinos-preset/services/treinos-preset.service';
 import { ExercicioTreinoAtual } from '../../../../../models/ExercicioTreinoAtual';
 import { CardExercicioAtualComponent } from './card-exercicio-atual/card-exercicio-atual.component';
+import { TreinoAtual } from '../../../../../models/TreinoAtual';
 
 @Component({
   selector: 'app-lista-exercicio-atual',
@@ -16,13 +17,13 @@ export class ListaExercicioAtualComponent implements OnInit {
 
   exerciciosTreino: ExercicioTreinoAtual[] = [];
 
-  _treinoAtual!: any;
-  get treinoAtual(): any {
+  _treinoAtual!: TreinoAtual;
+  get treinoAtual(): TreinoAtual {
     return this._treinoAtual;
   }
-  @Input() set treinoAtual(treinoAtual: any) {
+  @Input() set treinoAtual(treinoAtual: TreinoAtual) {
     this._treinoAtual = treinoAtual;
-    if (treinoAtual && treinoAtual.id && treinoAtual.idTreinoPreset) {
+    if (treinoAtual && treinoAtual.idTreinoPreset) {
       this.getExerciciosTreino(treinoAtual)
     }
   }
@@ -35,27 +36,62 @@ export class ListaExercicioAtualComponent implements OnInit {
   ngOnInit() {
   }
 
-  getExerciciosTreino(treinoAtual: any) {
+  getExerciciosTreino(treinoAtual: TreinoAtual) {
     this.presetService.getExerciciosPreset(treinoAtual.idTreinoPreset).subscribe(exerciciosPreset => {
-      this.treinoService.getExerciciosTreino(treinoAtual.id).subscribe(res => {
-        const exercicios = Utils.mapResFirebase(res);
-        const exsPreset = Utils.mapResFirebase(exerciciosPreset);
+      const exsPreset = Utils.mapResFirebase(exerciciosPreset);
+      if (treinoAtual.id) {
+        this.treinoService.getExerciciosTreino(treinoAtual.id).subscribe(res => {
+          const exercicios = Utils.mapResFirebase(res);
+          exsPreset.forEach((exPreset: any) => {
+            const exercicio = exercicios.find(p => p.idExercicioPreset === exPreset.id);
+            const exercicioTreino = new ExercicioTreinoAtual();
+            exercicioTreino.id = exercicio.id;
+            exercicioTreino.idTreino = exercicio.idTreino;
+            exercicioTreino.qtdRep = exercicio.qtdRep;
+            exercicioTreino.pesoKg = exercicio.pesoKg;
+            exercicioTreino.idExercicioPreset = exPreset.id;
+            exercicioTreino.qtdSerie = exPreset.qtdSerie;
+            exercicioTreino.nmExercicio = exPreset.nmExercicio;
+            exercicioTreino.obsExercicio = exPreset.obsExercicio;
+            exercicioTreino.minMaxRep = exPreset.minRep + '-' + exPreset.maxRep;
+            this.exerciciosTreino.push(exercicioTreino);
+          });
+        });
+      }
+      else {
         exsPreset.forEach((exPreset: any) => {
-          const exercicio = exercicios.find(p => p.idExercicioPreset === exPreset.id);
           const exercicioTreino = new ExercicioTreinoAtual();
-          exercicioTreino.id = exercicio.id;
-          exercicioTreino.idTreino = exercicio.idTreino;
           exercicioTreino.idExercicioPreset = exPreset.id;
-          exercicioTreino.qtdRep = exercicio.qtdRep;
-          exercicioTreino.pesoKg = exercicio.pesoKg;
           exercicioTreino.qtdSerie = exPreset.qtdSerie;
           exercicioTreino.nmExercicio = exPreset.nmExercicio;
           exercicioTreino.obsExercicio = exPreset.obsExercicio;
           exercicioTreino.minMaxRep = exPreset.minRep + '-' + exPreset.maxRep;
           this.exerciciosTreino.push(exercicioTreino);
         });
+      }
+    });
+  }
+
+  addCadaExercicio(exercicio: any, idTreino: string) {
+    return new Promise<void>((resolve) => {
+      let exTreino = {
+        idTreino: idTreino,
+        idExercicioPreset: exercicio.idExercicioPreset,
+        pesoKg: exercicio.pesoKg,
+        qtdRep: exercicio.qtdRep
+      }
+      this.treinoService.addExercicioDiario(exTreino).then(() => {
+        resolve();
       });
     });
+  }
+
+  addExerciciosDiarios(idTreino: string) {
+    const exerciciosDiarios = this.CardsExercicioAtual._results.map((component: CardExercicioAtualComponent) => component.exercicio);
+    debugger
+    const promises = exerciciosDiarios.map((exercicio: any) => this.addCadaExercicio(exercicio, idTreino));
+    // Usando Promise.all para aguardar a conclusão de todas as Promises
+    return Promise.all(promises);
   }
 
   atualizaCadaExercicio(exercicio: any) {

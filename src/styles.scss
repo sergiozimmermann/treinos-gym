@@ -180,6 +180,14 @@ input[type="checkbox"] {
     }
 }
 
+input[readonly] {
+    background-color: var(--background) !important;
+}
+
+textarea[readonly] {
+    background-color: var(--background) !important;
+}
+
 #menu-dialog {
     .mat-mdc-dialog-surface {
         border-radius: 0 !important;
