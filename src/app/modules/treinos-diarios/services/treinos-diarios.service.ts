@@ -51,4 +51,12 @@ export class TreinosDiariosService {
     return this.afs.collection('Exercicios_Diarios', ref => ref.where('idTreino', '==', idTreino)).snapshotChanges();
   }
 
+  atualizarExercicioDiario(exercicio: any): Promise<void> {
+    return this.afs.collection('Exercicios_Diarios').doc(exercicio.id).update(exercicio);
+  }
+
+  atualizarTreinoDiario(treinoAtual: any) {
+    return this.afs.collection('Treinos_Diarios').doc(treinoAtual.id).update(treinoAtual);
+  }
+
 }

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { TreinosDiariosService } from '../../services/treinos-diarios.service';
 import { ToastService } from '../../../../Utils/services/toast/toast.service';
-import { ListaTreinosDiariosComponent } from '../historico-treinos-diarios/components/lista-treinos-diarios/lista-treinos-diarios.component';
+import { TreinoDiarioAtualComponent } from './components/treino-diario-atual/treino-diario-atual.component';
 
 @Component({
   selector: 'app-editor-treino-diario',
@@ -10,7 +10,7 @@ import { ListaTreinosDiariosComponent } from '../historico-treinos-diarios/compo
 })
 export class EditorTreinoDiarioComponent implements OnInit {
 
-  @ViewChild('ListaTreinosDiarios') ListaTreinosDiarios!: ListaTreinosDiariosComponent;
+  @ViewChild('TreinoDiarioAtual') TreinoDiarioAtual!: TreinoDiarioAtualComponent;
 
   needAtualizarTreino: boolean = false;
 
@@ -18,14 +18,27 @@ export class EditorTreinoDiarioComponent implements OnInit {
 
   @Output() onSalvarOuCancelar = new EventEmitter();
 
-  constructor(private treinosService: TreinosDiariosService
+  constructor(private treinoService: TreinosDiariosService
     , private toastService: ToastService) { }
 
   ngOnInit() {
   }
 
-  salvarTreino(naoFecharPagina?: boolean) {
-
+  salvarTreino() {
+    this.TreinoDiarioAtual.ListaExercicioAtual.atualizarExerciciosDiarios().then(() => {
+      if (this.needAtualizarTreino) {
+        this.treinoService.atualizarTreinoDiario(this.treinoAtual).then(() => {
+          this.onSalvarOuCancelar.emit();
+          this.toastService.showMensagem('Salvo com sucesso!');
+        });
+      }
+      else {
+        this.onSalvarOuCancelar.emit();
+        this.toastService.showMensagem('Salvo com sucesso!');
+      }
+    }).catch(() => {
+      this.toastService.showMensagem('Ocorreu um erro!');
+    });
   }
 
 }

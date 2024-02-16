@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChildren } from '@angular/core';
 import { TreinosDiariosService } from '../../../../../services/treinos-diarios.service';
 import Utils from '../../../../../../../Utils/Utils';
 import { TreinosPresetService } from '../../../../../../treinos-preset/services/treinos-preset.service';
 import { ExercicioTreinoAtual } from '../../../../../models/ExercicioTreinoAtual';
+import { CardExercicioAtualComponent } from './card-exercicio-atual/card-exercicio-atual.component';
 
 @Component({
   selector: 'app-lista-exercicio-atual',
@@ -10,6 +11,8 @@ import { ExercicioTreinoAtual } from '../../../../../models/ExercicioTreinoAtual
   styleUrls: ['./lista-exercicio-atual.component.scss']
 })
 export class ListaExercicioAtualComponent implements OnInit {
+
+  @ViewChildren('CardExercicioAtual') CardsExercicioAtual: any;
 
   exerciciosTreino: ExercicioTreinoAtual[] = [];
 
@@ -26,7 +29,7 @@ export class ListaExercicioAtualComponent implements OnInit {
 
   @Output() salvarTreino = new EventEmitter();
 
-  constructor(private diarioService: TreinosDiariosService
+  constructor(private treinoService: TreinosDiariosService
     , private presetService: TreinosPresetService) { }
 
   ngOnInit() {
@@ -34,10 +37,10 @@ export class ListaExercicioAtualComponent implements OnInit {
 
   getExerciciosTreino(treinoAtual: any) {
     this.presetService.getExerciciosPreset(treinoAtual.idTreinoPreset).subscribe(exerciciosPreset => {
-      this.diarioService.getExerciciosTreino(treinoAtual.id).subscribe(res => {
+      this.treinoService.getExerciciosTreino(treinoAtual.id).subscribe(res => {
         const exercicios = Utils.mapResFirebase(res);
-        exerciciosPreset = Utils.mapResFirebase(exerciciosPreset);
-        exerciciosPreset.forEach((exPreset: any) => {
+        const exsPreset = Utils.mapResFirebase(exerciciosPreset);
+        exsPreset.forEach((exPreset: any) => {
           const exercicio = exercicios.find(p => p.idExercicioPreset === exPreset.id);
           const exercicioTreino = new ExercicioTreinoAtual();
           exercicioTreino.id = exercicio.id;
@@ -53,6 +56,27 @@ export class ListaExercicioAtualComponent implements OnInit {
         });
       });
     });
+  }
+
+  atualizaCadaExercicio(exercicio: any) {
+    return new Promise<void>((resolve) => {
+      let exTreino = {
+        id: exercicio.id,
+        pesoKg: exercicio.pesoKg,
+        qtdRep: exercicio.qtdRep
+      }
+      this.treinoService.atualizarExercicioDiario(exTreino).then(() => {
+        resolve();
+      });
+    });
+  }
+
+  atualizarExerciciosDiarios(): Promise<any> {
+    const cardsComChange = this.CardsExercicioAtual._results.filter((component: CardExercicioAtualComponent) => component.cardChange === true);
+    const exerciciosDiarios = cardsComChange.map((component: CardExercicioAtualComponent) => component.exercicio);
+    const promises = exerciciosDiarios.map((exercicio: any) => this.atualizaCadaExercicio(exercicio));
+    // Usando Promise.all para aguardar a conclusão de todas as Promises
+    return Promise.all(promises);
   }
 
 }

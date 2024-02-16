@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ListaExercicioAtualComponent } from './lista-exercicio-atual/lista-exercicio-atual.component';
 
 @Component({
   selector: 'app-treino-diario-atual',
@@ -6,6 +7,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./treino-diario-atual.component.scss']
 })
 export class TreinoDiarioAtualComponent implements OnInit {
+
+  @ViewChild('ListaExercicioAtual') ListaExercicioAtual!: ListaExercicioAtualComponent;
 
   @Input() treinoAtual: any;
 
