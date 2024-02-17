@@ -23,8 +23,8 @@ export class LoginService {
   }
 
   logout() {
-    this.afAuth.signOut();
     this.router.navigateByUrl('login');
+    this.afAuth.signOut();
   }
 
 }

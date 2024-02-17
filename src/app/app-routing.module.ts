@@ -10,7 +10,9 @@ const routes: Routes = [
     path: '', children: [
       {
         path: '', component: LayoutComponent, children: [
-          { path: 'treinos-diarios', loadChildren: () => import('./modules/treinos-diarios/treinos-diarios.module').then(m => m.TreinosDiariosModule), canActivate: [AuthGuard] },
+          {
+            path: 'treinos-diarios', loadChildren: () => import('./modules/treinos-diarios/treinos-diarios.module').then(m => m.TreinosDiariosModule), canActivate: [AuthGuard]
+          },
           { path: 'treinos-preset', loadChildren: () => import('./modules/treinos-preset/treinos-preset.module').then(m => m.TreinosPresetModule), canActivate: [AuthGuard] },
           { path: 'conta', loadChildren: () => import('./modules/conta/conta.module').then(m => m.ContaModule), canActivate: [AuthGuard] }
         ]

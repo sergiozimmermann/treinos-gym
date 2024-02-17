@@ -9,8 +9,10 @@ import { CalendarioComponent } from './calendario/calendario.component';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ConfirmDiscardChangesComponent } from './confirm-discard-changes/confirm-discard-changes.component';
+import { MatButtonModule } from '@angular/material/button';
 
-const components = [CheckboxComponent, DropdownComponent, CalendarioComponent]
+const components = [CheckboxComponent, DropdownComponent, CalendarioComponent, ConfirmDiscardChangesComponent]
 
 @NgModule({
   imports: [
@@ -21,6 +23,7 @@ const components = [CheckboxComponent, DropdownComponent, CalendarioComponent]
     , MatNativeDateModule
     , MatFormFieldModule
     , MatInputModule
+    , MatButtonModule
   ],
   declarations: components,
   exports: components,

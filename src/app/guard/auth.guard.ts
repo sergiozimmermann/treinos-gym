@@ -1,6 +1,7 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import { CanActivateFn, CanDeactivateFn, Router } from '@angular/router';
 import { AuthService } from './service/auth.service';
+import { ConfirmDiscardChangesService } from '../Utils/components/confirm-discard-changes/services/confirm-discard-changes.service';
 
 export const AuthGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
@@ -19,3 +20,12 @@ export const AuthGuard: CanActivateFn = (route, state) => {
     })
   });
 };
+
+export const CanDeactivateGuard: CanDeactivateFn<any> = (component: any) => {
+  if (component.isOpen) {
+    return inject(ConfirmDiscardChangesService).openConfirmDialog();
+  }
+  else {
+    return true;
+  }
+}

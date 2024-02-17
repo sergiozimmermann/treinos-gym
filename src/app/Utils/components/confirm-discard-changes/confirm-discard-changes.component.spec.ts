@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { PreviewTreinoPresetComponent } from './preview-treino-preset.component';
+import { ConfirmDiscardChangesComponent } from './confirm-discard-changes.component';
 
-describe('PreviewTreinoPresetComponent', () => {
-  let component: PreviewTreinoPresetComponent;
-  let fixture: ComponentFixture<PreviewTreinoPresetComponent>;
+describe('ConfirmDiscardChangesComponent', () => {
+  let component: ConfirmDiscardChangesComponent;
+  let fixture: ComponentFixture<ConfirmDiscardChangesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PreviewTreinoPresetComponent ]
+      declarations: [ ConfirmDiscardChangesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PreviewTreinoPresetComponent);
+    fixture = TestBed.createComponent(ConfirmDiscardChangesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -244,3 +244,9 @@ mat-dialog-content {
 .mat-divider {
     border-top-color: var(--font-color) !important;
 }
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+    background-color: var(--background) !important;
+    color: var(--font-color) !important;
+    padding: 10px;
+}

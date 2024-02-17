@@ -11,7 +11,6 @@ import { TreinosDiariosRoutingModule } from './treinos-diarios-routing.module';
 import { FiltroTreinosDiariosComponent } from './components/historico-treinos-diarios/components/filtro-treinos-diarios/filtro-treinos-diarios.component';
 import { ListaTreinosDiariosComponent } from './components/historico-treinos-diarios/components/lista-treinos-diarios/lista-treinos-diarios.component';
 import { CardTreinoDiarioComponent } from './components/historico-treinos-diarios/components/lista-treinos-diarios/card-treino-diario/card-treino-diario.component';
-import { PreviewTreinoPresetComponent } from './components/editor-treino-diario/components/preview-treino-preset/preview-treino-preset.component';
 import { TreinoDiarioAtualComponent } from './components/editor-treino-diario/components/treino-diario-atual/treino-diario-atual.component';
 import { ListaExercicioAtualComponent } from './components/editor-treino-diario/components/treino-diario-atual/lista-exercicio-atual/lista-exercicio-atual.component';
 import { CardExercicioAtualComponent } from './components/editor-treino-diario/components/treino-diario-atual/lista-exercicio-atual/card-exercicio-atual/card-exercicio-atual.component';
@@ -42,7 +41,6 @@ import { TreinosPresetModule } from '../treinos-preset/treinos-preset.module';
     , ListaTreinosDiariosComponent
     , CardTreinoDiarioComponent
     , EditorTreinoDiarioComponent
-    , PreviewTreinoPresetComponent
     , TreinoDiarioAtualComponent
     , ListaExercicioAtualComponent
     , CardExercicioAtualComponent
