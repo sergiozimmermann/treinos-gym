@@ -3,7 +3,7 @@
     <button mat-button class="warn" (click)="onSalvarOuCancelar.emit()">Descartar</button>
   </div>
   <div class="salvar">
-    <button mat-button (click)="salvarTreino()">{{treinoAtual.id ? 'Concluir' : 'Adicionar'}}</button>
+    <button mat-button class="secondary" (click)="salvarTreino()">{{treinoAtual.id ? 'Concluir' : 'Adicionar'}}</button>
   </div>
 </div>
 <div class="nmTreino">

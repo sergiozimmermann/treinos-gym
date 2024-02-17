@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-card-treino-diario',
@@ -8,6 +8,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class CardTreinoDiarioComponent implements OnInit {
 
   @Input() treino: any;
+
+  @Output() deletarTreino = new EventEmitter();
 
   constructor() { }
 

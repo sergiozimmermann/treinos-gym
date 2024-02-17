@@ -3,6 +3,7 @@ import { TreinosDiariosService } from '../../../../services/treinos-diarios.serv
 import { FiltroTreinos } from '../../../../models/FiltroTreinos';
 import { UsuarioService } from '../../../../../../shared/services/usuario.service';
 import Utils from '../../../../../../Utils/Utils';
+import { ToastService } from '../../../../../../Utils/services/toast/toast.service';
 
 @Component({
   selector: 'app-lista-treinos-diarios',
@@ -16,7 +17,8 @@ export class ListaTreinosDiariosComponent implements OnInit {
   @Output() onSelecionarTreino = new EventEmitter();
 
   constructor(private treinoService: TreinosDiariosService
-    , private usuarioService: UsuarioService) {
+    , private usuarioService: UsuarioService
+    , private toastService: ToastService) {
     this.getTreinosDiarios();
   }
 
@@ -35,6 +37,14 @@ export class ListaTreinosDiariosComponent implements OnInit {
 
         this.treinosDiarios = resFormatado;
       });
+    });
+  }
+
+  deletarTreino(idTreino: string) {
+    this.treinoService.deletarTreino(idTreino).then(() => {
+      this.toastService.showMensagem('Deletado com sucesso!');
+    }).catch(() => {
+      this.toastService.showMensagem('Ocorreu um erro!');
     });
   }
 

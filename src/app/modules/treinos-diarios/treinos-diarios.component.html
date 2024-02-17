@@ -1,6 +1,6 @@
 <div [ngClass]="{'display-none': isOpen}">
     <app-historico-treinos-diarios (adicionarTreino)="showAddTreino()"
-        (onSelecionarTreino)="selecionarTreino($event)"></app-historico-treinos-diarios>
+        (onSelecionarTreino)="abrirTreino($event)"></app-historico-treinos-diarios>
 </div>
 
 <div class="editorTreino" *ngIf="isOpen">

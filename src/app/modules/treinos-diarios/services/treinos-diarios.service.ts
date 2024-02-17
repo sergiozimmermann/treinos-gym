@@ -73,4 +73,17 @@ export class TreinosDiariosService {
     return this.afs.collection('Treinos_Diarios').doc(treinoAtual.id).update(treinoAtual);
   }
 
+  deletarExerciciosPorTreino(idTreino: string) {
+    this.afs.collection('Exercicios_Diarios', ref => ref.where('idTreino', '==', idTreino)).get().subscribe(res => {
+      res.forEach(doc => {
+        doc.ref.delete();
+      });
+    });
+  }
+
+  deletarTreino(idTreino: string) {
+    this.deletarExerciciosPorTreino(idTreino);
+    return this.afs.collection('Treinos_Diarios').doc(idTreino).delete();
+  }
+
 }

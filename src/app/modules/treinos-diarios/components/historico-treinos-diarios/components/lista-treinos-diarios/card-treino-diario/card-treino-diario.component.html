@@ -5,4 +5,7 @@
   <div>
     {{treino?.dtTreino | date: 'dd/MM/yyyy'}}
   </div>
+  <div style="margin-top: 10px;">
+    <button mat-button class="warn deletarTreino" (click)="deletarTreino.emit()">Deletar</button>
+  </div>
 </div>

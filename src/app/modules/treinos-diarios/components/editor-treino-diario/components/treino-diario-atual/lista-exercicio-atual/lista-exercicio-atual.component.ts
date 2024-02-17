@@ -88,7 +88,6 @@ export class ListaExercicioAtualComponent implements OnInit {
 
   addExerciciosDiarios(idTreino: string) {
     const exerciciosDiarios = this.CardsExercicioAtual._results.map((component: CardExercicioAtualComponent) => component.exercicio);
-    debugger
     const promises = exerciciosDiarios.map((exercicio: any) => this.addCadaExercicio(exercicio, idTreino));
     // Usando Promise.all para aguardar a conclusão de todas as Promises
     return Promise.all(promises);

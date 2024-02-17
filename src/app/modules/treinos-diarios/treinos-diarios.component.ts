@@ -5,6 +5,11 @@ import { TreinoAtual } from './models/TreinoAtual';
 import { UsuarioService } from '../../shared/services/usuario.service';
 import { Combo } from '../../Utils/components/dropdown/models/combo';
 
+class EventTreino {
+  treino: any;
+  click: any;
+}
+
 @Component({
   selector: 'app-treinos-diarios',
   templateUrl: './treinos-diarios.component.html',
@@ -43,8 +48,12 @@ export class TreinosDiariosComponent implements OnInit {
     });
   }
 
-  selecionarTreino(treino: any) {
-    this.treinoAtual = treino;
+  abrirTreino(event: EventTreino) {
+    if (event.click && ['mdc-button__label', 'mdc-button__label', 'mat-mdc-button-touch-target'].includes(event.click.target.className)) {
+      return;
+    }
+
+    this.treinoAtual = event.treino;
     this.isOpen = true;
   }
 
