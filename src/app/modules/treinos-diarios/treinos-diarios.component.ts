@@ -4,6 +4,7 @@ import { AddTreinoDialogComponent } from './components/add-treino-dialog/add-tre
 import { TreinoAtual } from './models/TreinoAtual';
 import { UsuarioService } from '../../shared/services/usuario.service';
 import { Combo } from '../../Utils/components/dropdown/models/combo';
+import * as _ from 'lodash';
 
 class EventTreino {
   treino: any;
@@ -26,6 +27,15 @@ export class TreinosDiariosComponent implements OnInit {
   ngOnInit() {
   }
 
+  abrirTreino(event: EventTreino) {
+    if (event.click && ['mdc-button__label', 'mdc-button__label', 'mat-mdc-button-touch-target'].includes(event.click.target.className)) {
+      return;
+    }
+
+    this.treinoAtual = _.cloneDeep(event.treino);
+    this.isOpen = true;
+  }
+
   showAddTreino() {
     const dialogRef = this.dialog.open(AddTreinoDialogComponent, {
       id: 'add-treino-dialog'
@@ -46,15 +56,6 @@ export class TreinosDiariosComponent implements OnInit {
       this.treinoAtual.nmTreino = preset.label;
       this.isOpen = true;
     });
-  }
-
-  abrirTreino(event: EventTreino) {
-    if (event.click && ['mdc-button__label', 'mdc-button__label', 'mat-mdc-button-touch-target'].includes(event.click.target.className)) {
-      return;
-    }
-
-    this.treinoAtual = event.treino;
-    this.isOpen = true;
   }
 
 }
