@@ -25,7 +25,7 @@ export class EditorTreinoDiarioComponent implements OnInit {
   }
 
   salvarTreino() {
-    if (this.treinoAtual.id) {
+    if (this.treinoAtual?.id) {
       this.atualizarTreino();
     }
     else {
@@ -43,7 +43,7 @@ export class EditorTreinoDiarioComponent implements OnInit {
       })
     }).catch(() => {
       this.toastService.showMensagem('Ocorreu um erro!');
-    })
+    });
   }
 
   atualizarTreino() {

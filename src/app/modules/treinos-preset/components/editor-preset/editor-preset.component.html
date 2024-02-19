@@ -3,7 +3,7 @@
     <button mat-button class="warn" (click)="onSalvarOuCancelar.emit()">Descartar</button>
   </div>
   <div class="salvar">
-    <button mat-button class="secondary" (click)="salvarPreset()">Salvar</button>
+    <button mat-button class="secondary" (click)="salvarPreset()">{{presetAtual?.id ? 'Salvar' : 'Adicionar'}}</button>
   </div>
 </div>
 <div class="nmPreset">
@@ -15,6 +15,6 @@
     placeholder="Divisão Treino" (change)="needAtualizarPreset = true">
 </div>
 <div class="listaExPreset">
-  <app-lista-exercicios-preset #ListaExericiosPreset [idPreset]="presetAtual?.id"
-    (salvarPreset)="salvarPreset($event)"></app-lista-exercicios-preset>
+  <app-lista-exercicios-preset #ListaExericiosPreset [novoPreset]="novoPreset" [idPreset]="presetAtual?.id"
+    (salvarPreset)="salvarPreset()"></app-lista-exercicios-preset>
 </div>

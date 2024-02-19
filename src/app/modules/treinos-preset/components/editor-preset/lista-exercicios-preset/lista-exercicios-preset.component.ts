@@ -16,6 +16,20 @@ export class ListaExerciciosPresetComponent implements OnInit {
 
   exerciciosPreset: any[] = [];
 
+  exPresetsAdicionados: any[] = [];
+  exPresetsDeletados: any[] = [];
+
+  _novoPreset!: boolean;
+  get novoPreset(): boolean {
+    return this._novoPreset;
+  }
+  @Input() set novoPreset(novoPreset: boolean) {
+    this._novoPreset = novoPreset;
+    if (novoPreset) {
+      this.addExercicio();
+    }
+  }
+
   _idPreset!: string;
   get idPreset(): string {
     return this._idPreset;
@@ -43,15 +57,46 @@ export class ListaExerciciosPresetComponent implements OnInit {
     });
   }
 
-  addExercicioPreset() {
+  addExercicio() {
     if (this.readOnly) return; // Controle de segurança
-    this.salvarPreset.emit(true);
-    const preset = new ExercicioPreset();
-    preset.idPreset = this.idPreset;
-    this.presetService.addExercicioPreset(preset as any).then(() => {
-      this.exerciciosPreset.push(preset);
-      this.toastService.showMensagem('Adicionado com Sucesso!');
-    }).catch(() => this.toastService.showMensagem('Ocorreu um erro!'));
+    const exercicio = new ExercicioPreset();
+    if (this.idPreset) {
+      exercicio.idPreset = this.idPreset;
+
+      // Lógica para variável de controle para adicioanar os exercícios ao salvar
+      this.exPresetsAdicionados.push(exercicio);
+    }
+    this.exerciciosPreset.push(exercicio);
+  }
+
+  addExerciciosPreset(idPreset: string) {
+    const exerciciosDiarios = this.CardsExercicioPreset._results.map((component: CardExercicioPresetComponent) => component.formulario.getRawValue());
+    const promises = exerciciosDiarios.map((exercicio: any) => this.addCadaExercicioPreset(exercicio, idPreset));
+    // Usando Promise.all para aguardar a conclusão de todas as Promises
+    return Promise.all(promises);
+  }
+
+  addCadaExercicioPreset(exercicio: any, idPreset: string) {
+    return new Promise<void>((resolve) => {
+      exercicio.idPreset = idPreset;
+      this.presetService.addExercicioPreset(exercicio).then(() => {
+        resolve();
+      });
+    });
+  }
+
+  atualizarExerciciosPreset() {
+    if (this.exPresetsDeletados.length > 0) {
+      this.removerExPresets(this.exPresetsDeletados);
+    }
+    if (this.exPresetsAdicionados.length > 0) {
+      this.addExPresets(this.exPresetsAdicionados);
+    }
+    const cardsComChange = this.CardsExercicioPreset._results.filter((component: CardExercicioPresetComponent) => component.cardChange === true && component.exercicioPreset.id);
+    const exerciciosDiarios = cardsComChange.map((component: CardExercicioPresetComponent) => component.formulario.getRawValue());
+    const promises = exerciciosDiarios.map((exercicio: any) => this.atualizaCadaExercicio(exercicio));
+    // Usando Promise.all para aguardar a conclusão de todas as Promises
+    return Promise.all(promises);
   }
 
   atualizaCadaExercicio(exercicio: any) {
@@ -63,23 +108,36 @@ export class ListaExerciciosPresetComponent implements OnInit {
     });
   }
 
-  atualizarExerciciosPreset(): Promise<any> {
-    if (this.readOnly) {
-      return Promise.all([false]); // Controle de segurança
+  removerExPreset(idExercicioPreset: string, index: number) {
+    if (this.readOnly) return; // Controle de segurança
+
+    // Verificação para ver se está adicionando ou atualizando o preset
+    if (idExercicioPreset) {
+      if (this.idPreset) {
+        // Lógica para variável de controle para deletar os exercícios ao salvar
+        this.exPresetsDeletados.push(this.exerciciosPreset[index]);
+      }
+
+      this.exerciciosPreset = this.exerciciosPreset.filter(exercicio => exercicio.id !== idExercicioPreset);
     }
-    const cardsComChange = this.CardsExercicioPreset._results.filter((component: CardExercicioPresetComponent) => component.cardChange === true);
-    const exerciciosPresetForm = cardsComChange.map((component: CardExercicioPresetComponent) => component.formulario.getRawValue());
-    const promises = exerciciosPresetForm.map((exercicio: any) => this.atualizaCadaExercicio(exercicio));
-    // Usando Promise.all para aguardar a conclusão de todas as Promises
-    return Promise.all(promises);
+    else {
+      this.exerciciosPreset.splice(index, 1);
+    }
   }
 
-  removerExPreset(idExercicioPreset: string) {
-    if (this.readOnly) return; // Controle de segurança
-    this.presetService.deletarExercicioPreset(idExercicioPreset).then(() => {
-      this.exerciciosPreset = this.exerciciosPreset.filter(exercicio => exercicio.id !== idExercicioPreset);
-      this.toastService.showMensagem('Deletado com Sucesso!');
-    }).catch(() => this.toastService.showMensagem('Ocorreu um erro!'));
+  addExPresets(exercicios: any[]) {
+    exercicios.forEach((exercicio: any) => {
+      const cardPreset: CardExercicioPresetComponent = this.CardsExercicioPreset.find((component: CardExercicioPresetComponent) => component.exercicioPreset.id === exercicio.id);
+      const exPreset = cardPreset.formulario.getRawValue();
+      exPreset.idPreset = this.idPreset;
+      this.presetService.addExercicioPreset(exPreset);
+    });
+  }
+
+  removerExPresets(exercicios: any[]) {
+    exercicios.forEach((exercicio: any) => {
+      this.presetService.deletarExercicioPreset(exercicio.id);
+    });
   }
 
 }

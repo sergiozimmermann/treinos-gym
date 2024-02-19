@@ -14,7 +14,18 @@ export class EditorPresetComponent implements OnInit {
 
   needAtualizarPreset: boolean = false;
 
-  @Input() presetAtual: any;
+  novoPreset: boolean = false;
+
+  _presetAtual!: any;
+  get presetAtual(): any {
+    return this._presetAtual;
+  }
+  @Input() set presetAtual(presetAtual: any) {
+    this._presetAtual = presetAtual;
+    if (presetAtual && !presetAtual.id) {
+      this.novoPreset = true;
+    }
+  }
 
   @Output() onSalvarOuCancelar = new EventEmitter();
 
@@ -24,23 +35,41 @@ export class EditorPresetComponent implements OnInit {
   ngOnInit() {
   }
 
-  salvarPreset(naoFecharPagina?: boolean) {
-    this.ListaExericiosPreset.atualizarExerciciosPreset().then(() => {
-      if (this.needAtualizarPreset) {
-        this.presetService.atualizarPreset(this.presetAtual).then(() => {
-          if (!naoFecharPagina) this.onSalvarOuCancelar.emit();
-          this.toastService.showMensagem('Salvo com sucesso!');
-        }).catch(() => {
-          this.toastService.showMensagem('Ocorreu um erro!');
-        });
-      }
-      else {
-        if (!naoFecharPagina) this.onSalvarOuCancelar.emit();
-        this.toastService.showMensagem('Salvo com sucesso!');
-      }
+  salvarPreset() {
+    if (this.presetAtual?.id) {
+      this.atualizarPreset();
+    }
+    else {
+      this.addPreset();
+    }
+  }
+
+  addPreset() {
+    this.presetService.addPreset(this.presetAtual).then(res => {
+      this.ListaExericiosPreset.addExerciciosPreset(res.id).then(() => {
+        this.onSalvarOuCancelar.emit();
+        this.toastService.showMensagem('Adicionado com sucesso!');
+      }).catch(() => {
+        this.toastService.showMensagem('Ocorreu um erro!');
+      })
     }).catch(() => {
       this.toastService.showMensagem('Ocorreu um erro!');
     });
+  }
+
+  atualizarPreset() {
+    this.ListaExericiosPreset.atualizarExerciciosPreset().then(() => {
+      if (this.needAtualizarPreset) {
+        this.presetService.atualizarPreset(this.presetAtual).then(() => {
+          this.onSalvarOuCancelar.emit();
+          this.toastService.showMensagem('Atualizado com sucesso!');
+        }).catch(() => this.toastService.showMensagem('Ocorreu um erro!'));
+      }
+      else {
+        this.onSalvarOuCancelar.emit();
+        this.toastService.showMensagem('Atualizado com sucesso!');
+      }
+    }).catch(() => this.toastService.showMensagem('Ocorreu um erro!'));
   }
 
 }

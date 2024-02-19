@@ -14,6 +14,7 @@ export class ListaPresetComponent implements OnInit {
   @Input() treinosPreset: TreinoPreset[] = [];
 
   @Output() onSelecionarPreset = new EventEmitter();
+  @Output() onAddPreset = new EventEmitter();
 
   constructor(private presetService: TreinosPresetService
     , private usuarioService: UsuarioService
@@ -26,9 +27,10 @@ export class ListaPresetComponent implements OnInit {
     this.usuarioService.getIdUsuario().then(idUsuario => {
       const preset = new TreinoPreset();
       preset.idUsuario = idUsuario;
-      this.presetService.addPreset(preset).then(() => {
-        this.toastService.showMensagem('Adicionado com sucesso!');
-      }).catch(() => this.toastService.showMensagem('Ocorreu um erro!'));
+      this.onAddPreset.emit(preset);
+      // this.presetService.addPreset(preset).then(() => {
+      //   this.toastService.showMensagem('Adicionado com sucesso!');
+      // }).catch(() => this.toastService.showMensagem('Ocorreu um erro!'));
     });
   }
 

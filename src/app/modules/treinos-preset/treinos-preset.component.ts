@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 
 class EventPreset {
   preset: any;
-  click: any;
+  click?: any;
 }
 
 @Component({

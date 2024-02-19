@@ -13,6 +13,7 @@ export class HistoricoPresetComponent implements OnInit {
   treinosPreset: any[] = [];
 
   @Output() onSelecionarPreset = new EventEmitter();
+  @Output() onAddPreset = new EventEmitter();
 
   constructor(private presetService: TreinosPresetService
     , private usuarioService: UsuarioService) {

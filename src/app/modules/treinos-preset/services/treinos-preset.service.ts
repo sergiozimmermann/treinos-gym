@@ -42,11 +42,10 @@ export class TreinosPresetService {
     return this.afs.collection('Exercicios_Preset', ref => ref.where('idPreset', '==', idPreset).orderBy('dtCriacao')).snapshotChanges();
   }
 
-  addExercicioPreset(preset: any): Promise<any> {
-    preset = JSON.stringify(preset);
-    preset = JSON.parse(preset);
-    preset.dtCriacao = new Date();
-    return this.afs.collection('Exercicios_Preset').add(preset);
+  addExercicioPreset(exercicio: any): Promise<any> {
+    exercicio = JSON.parse(JSON.stringify(exercicio));
+    exercicio.dtCriacao = new Date();
+    return this.afs.collection('Exercicios_Preset').add(exercicio);
   }
 
   atualizarExercicioPreset(preset: any): Promise<any> {
