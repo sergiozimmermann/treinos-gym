@@ -1,7 +1,7 @@
 <form [formGroup]="formulario" class="flex flex-column" (ngSubmit)="salvarUsuario()">
   <mat-form-field>
     <mat-label>Nome</mat-label>
-    <input class="inputNome" matInput formControlName="nmUsuario">
+    <input #InputNmUsuario class="inputNome" matInput formControlName="nmUsuario" (focus)="InputNmUsuario?.select()">
   </mat-form-field>
   <div id="salvar" class="align-self-end">
     <button mat-button class="botaoSalvar" type="submit">Salvar</button>

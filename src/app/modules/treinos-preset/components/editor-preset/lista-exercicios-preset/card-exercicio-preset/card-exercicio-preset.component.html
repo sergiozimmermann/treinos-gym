@@ -1,25 +1,30 @@
 <form [formGroup]="formulario" class="cardExercicio flex flex-column">
     <div class="form-group">
         <label>Nome Exercício</label>
-        <input type="text" formControlName="nmExercicio" (change)="onChangeInputs()" [readonly]="readOnly">
+        <input #InputNmExercicio type="text" formControlName="nmExercicio" (change)="onChangeInputs()"
+            [readonly]="readOnly" (focus)="InputNmExercicio.select()">
     </div>
     <div class="form-group">
         <label>Obs.</label>
-        <textarea formControlName="obsExercicio" (change)="onChangeInputs()" [readonly]="readOnly"></textarea>
+        <textarea #InputObs formControlName="obsExercicio" (change)="onChangeInputs()" [readonly]="readOnly"
+            (focus)="InputObs.select()"></textarea>
     </div>
     <div class="form-group flex flex-row" style="column-gap: 10px">
         <div>
             <label>Qtd. Séries</label>
-            <input type="number" formControlName="qtdSerie" (change)="onChangeInputs()" [readonly]="readOnly">
+            <input #InputQtdSeries type="number" formControlName="qtdSerie" (change)="onChangeInputs()"
+                [readonly]="readOnly" (focus)="InputQtdSeries.select()">
         </div>
         <div class="form-group flex flex-row" style="column-gap: 10px;">
             <div>
                 <label>Min. Rep.</label>
-                <input type="number" formControlName="minRep" (change)="onChangeInputs()" [readonly]="readOnly">
+                <input #InputMinRep type="number" formControlName="minRep" (change)="onChangeInputs()"
+                    [readonly]="readOnly" (focus)="InputMinRep.select()">
             </div>
             <div>
                 <label>Max. Rep.</label>
-                <input type="number" formControlName="maxRep" (change)="onChangeInputs()" [readonly]="readOnly">
+                <input #InputMaxRep type="number" formControlName="maxRep" (change)="onChangeInputs()"
+                    [readonly]="readOnly" (focus)="InputMaxRep.select()">
             </div>
         </div>
     </div>
