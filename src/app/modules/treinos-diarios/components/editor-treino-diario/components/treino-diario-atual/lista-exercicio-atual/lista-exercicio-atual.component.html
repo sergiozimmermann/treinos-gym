@@ -1,6 +1,6 @@
 <div class="flex flex-column listaExercicio">
   @for (exercicio of exerciciosTreino; track $index) {
-  <app-card-exercicio-atual #CardExercicioAtual [exercicio]="exercicio"
-    (exercicioChange)="exerciciosTreino[$index] = $event"></app-card-exercicio-atual>
+  <app-card-exercicio-atual #CardExercicioAtual [exerciciosUltimoTreino]="exerciciosUltimoTreino"
+    [exercicio]="exercicio" (exercicioChange)="exerciciosTreino[$index] = $event"></app-card-exercicio-atual>
   }
 </div>

@@ -15,12 +15,14 @@
       <div class="flex pesoKg">
         <label [for]="'pesoKg' + $index">Peso (Kg):</label>
         <input #InputPesoKg [id]="'pesoKg' + $index" type="number" [(ngModel)]="exercicio.pesoKg[$index]"
-          [placeholder]="0" (focus)="InputPesoKg.select()" (change)="cardChange = true">
+          [placeholder]="placeholderExercicios ? placeholderExercicios.pesoKg[$index] : 0"
+          (focus)="InputPesoKg.select()" (change)="cardChange = true">
       </div>
       <div class="flex qtdRep">
         <label [for]="'qtdRep' + $index">Qtd. Rep:</label>
         <input #InputQtdRep [id]="'qtdRep' + $index" type="number" [(ngModel)]="exercicio.qtdRep[$index]"
-          [placeholder]="0" (focus)="InputQtdRep.select()" (change)="cardChange = true">
+          [placeholder]="placeholderExercicios ? placeholderExercicios.qtdRep[$index] : 0"
+          (focus)="InputQtdRep.select()" (change)="cardChange = true">
       </div>
     </div>
     }

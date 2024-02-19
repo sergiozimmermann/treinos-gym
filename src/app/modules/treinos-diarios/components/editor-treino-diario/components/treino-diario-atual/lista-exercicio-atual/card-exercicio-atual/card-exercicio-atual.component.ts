@@ -9,8 +9,26 @@ import { ExercicioTreinoAtual } from '../../../../../../models/ExercicioTreinoAt
 export class CardExercicioAtualComponent implements OnInit {
 
   cardChange: boolean = false;
+  placeholderExercicios?: ExercicioTreinoAtual;
 
-  @Input() exercicio!: ExercicioTreinoAtual;
+  _exerciciosUltimoTreino!: ExercicioTreinoAtual[];
+  get exerciciosUltimoTreino(): ExercicioTreinoAtual[] {
+    return this._exerciciosUltimoTreino;
+  }
+  @Input() set exerciciosUltimoTreino(exerciciosUltimoTreino: ExercicioTreinoAtual[]) {
+    this._exerciciosUltimoTreino = exerciciosUltimoTreino;
+  }
+
+  _exercicio!: ExercicioTreinoAtual;
+  get exercicio(): ExercicioTreinoAtual {
+    return this._exercicio;
+  }
+  @Input() set exercicio(exercicio: ExercicioTreinoAtual) {
+    this._exercicio = exercicio;
+    if (exercicio && this.exerciciosUltimoTreino && this.exerciciosUltimoTreino.length > 0) {
+      this.placeholderExercicios = this.exerciciosUltimoTreino.find(ex => ex.idExercicioPreset === exercicio.idExercicioPreset);
+    }
+  }
   @Output() exercicioChange = new EventEmitter();
 
   constructor() { }
