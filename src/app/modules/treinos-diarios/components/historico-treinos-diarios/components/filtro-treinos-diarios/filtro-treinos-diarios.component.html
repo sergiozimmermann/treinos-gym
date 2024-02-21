@@ -1,7 +1,7 @@
 <div (keyup.enter)="filtrar()">
   <div class="form-group">
     <label for="nmTreino">Nome Treino</label>
-    <input id="nmTreino" type="text" [(ngModel)]="filtro.nmTreino">
+    <input #InputNmTreino id="nmTreino" type="text" [(ngModel)]="filtro.nmTreino" (focus)="InputNmTreino?.select()">
   </div>
   <div class="flex datas">
     <div class="dtTreino">
