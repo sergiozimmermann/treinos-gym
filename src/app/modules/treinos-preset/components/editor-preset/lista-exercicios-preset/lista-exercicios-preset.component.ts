@@ -71,7 +71,10 @@ export class ListaExerciciosPresetComponent implements OnInit {
 
   addExerciciosPreset(idPreset: string) {
     const exerciciosDiarios = this.CardsExercicioPreset._results.map((component: CardExercicioPresetComponent) => component.formulario.getRawValue());
-    const promises = exerciciosDiarios.map((exercicio: any) => this.addCadaExercicioPreset(exercicio, idPreset));
+    const promises = exerciciosDiarios.map((exercicio: any, index: number) => {
+      exercicio.indexExPreset = index;
+      this.addCadaExercicioPreset(exercicio, idPreset)
+    });
     // Usando Promise.all para aguardar a conclusão de todas as Promises
     return Promise.all(promises);
   }

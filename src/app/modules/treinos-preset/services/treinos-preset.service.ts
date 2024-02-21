@@ -39,12 +39,11 @@ export class TreinosPresetService {
   }
 
   getExerciciosPreset(idPreset: string) {
-    return this.afs.collection('Exercicios_Preset', ref => ref.where('idPreset', '==', idPreset).orderBy('dtCriacao')).snapshotChanges();
+    return this.afs.collection('Exercicios_Preset', ref => ref.where('idPreset', '==', idPreset).orderBy('indexExPreset')).snapshotChanges();
   }
 
   addExercicioPreset(exercicio: any): Promise<any> {
     exercicio = JSON.parse(JSON.stringify(exercicio));
-    exercicio.dtCriacao = new Date();
     return this.afs.collection('Exercicios_Preset').add(exercicio);
   }
 
