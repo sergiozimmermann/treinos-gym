@@ -1,4 +1,4 @@
-package com.example.app;
+package com.treinosgym.app;
 
 import com.getcapacitor.BridgeActivity;
 

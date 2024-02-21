@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.example.app',
-  appName: 'treinos-gym',
+  appId: 'com.treinosgym.app',
+  appName: 'Treinos Gym',
   webDir: 'dist/treinos-gym/browser',
   server: {
     androidScheme: 'https'

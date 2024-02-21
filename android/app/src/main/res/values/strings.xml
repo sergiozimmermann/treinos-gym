@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">treinos-gym</string>
-    <string name="title_activity_main">treinos-gym</string>
-    <string name="package_name">com.example.app</string>
-    <string name="custom_url_scheme">com.example.app</string>
+    <string name="app_name">Treinos Gym</string>
+    <string name="title_activity_main">Treinos Gym</string>
+    <string name="package_name">com.treinosgym.app</string>
+    <string name="custom_url_scheme">com.treinosgym.app</string>
 </resources>
