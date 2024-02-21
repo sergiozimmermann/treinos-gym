@@ -43,13 +43,13 @@ export class ListaExercicioAtualComponent implements OnInit {
       if (treinoAnterior) {
         this.exerciciosUltimoTreino = Utils.mapResFirebase(treinoAnterior);
       }
-      this.presetService.getExerciciosPreset(treinoAtual.idTreinoPreset).subscribe(exerciciosPreset => {
-        const exsPreset = Utils.mapResFirebase(exerciciosPreset);
+      this.presetService.getExerciciosPreset(treinoAtual.idTreinoPreset).subscribe(resPreset => {
+        const exerciciosPreset = Utils.mapResFirebase(resPreset);
         if (treinoAtual.id) {
-          this.treinoService.getExerciciosTreino(treinoAtual.id).subscribe(res => {
-            const exercicios = Utils.mapResFirebase(res);
-            exsPreset.forEach((exPreset: any) => {
-              const exercicio = exercicios.find(p => p.idExercicioPreset === exPreset.id);
+          this.treinoService.getExerciciosTreino(treinoAtual.id).subscribe(resDiario => {
+            const exerciciosDiarios = Utils.mapResFirebase(resDiario);
+            this.exerciciosTreino = exerciciosPreset.map((exPreset: any) => {
+              const exercicio = exerciciosDiarios.find(ex => ex.idExercicioPreset === exPreset.id);
               const exercicioTreino = new ExercicioTreinoAtual();
               exercicioTreino.id = exercicio.id;
               exercicioTreino.idTreino = exercicio.idTreino;
@@ -60,19 +60,19 @@ export class ListaExercicioAtualComponent implements OnInit {
               exercicioTreino.nmExercicio = exPreset.nmExercicio;
               exercicioTreino.obsExercicio = exPreset.obsExercicio;
               exercicioTreino.minMaxRep = exPreset.minRep + '-' + exPreset.maxRep;
-              this.exerciciosTreino.push(exercicioTreino);
+              return exercicioTreino;
             });
           });
         }
         else {
-          exsPreset.forEach((exPreset: any) => {
+          this.exerciciosTreino = exerciciosPreset.map((exPreset: any) => {
             const exercicioTreino = new ExercicioTreinoAtual();
             exercicioTreino.idExercicioPreset = exPreset.id;
             exercicioTreino.qtdSerie = exPreset.qtdSerie;
             exercicioTreino.nmExercicio = exPreset.nmExercicio;
             exercicioTreino.obsExercicio = exPreset.obsExercicio;
             exercicioTreino.minMaxRep = exPreset.minRep + '-' + exPreset.maxRep;
-            this.exerciciosTreino.push(exercicioTreino);
+            return exercicioTreino;
           });
         }
       });
