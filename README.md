@@ -1,5 +1,32 @@
 # TreinosGym
 
+FAZER:
+Bugs:
+nao esta salvando um exercicio novo em um preset ja existente
+
+quando salvo um exercício diário sem peso/rep, o placeholder fica como undefined
+
+scroll está bugado na lista de presets/treinos
+
+
+Implementações:
+checkbox para "biset", "dropset" e talvez "unilateral"... "biset" insere 2 exercicios como se fossem 1 só. "dropset" permite adicionar um número de "sub-séries" para cada série.
+
+mudar ícone do app capacitor
+
+FAZER DOCUMENTAÇÃO E COMENTAR COMPONENTES
+
+
+Para os usuários:
+Ver maneiras de monetizar (ex: anúncios e plano barato sem anúncios)
+Página de login com esqueci minha senha e criação de conta (login com email e google) com verificação no email.
+Validações de formulário validators.required
+Treino Diário -> Quando salvar sem digitar nada, levar em conta o valor do placeholder.
+Planos no cloud store do firebase
+ANTES DE COLOCAR EM PRODUÇÃO: CONTROLAR MELHOR O GIT PARA BRANCHS DE DEVELOP E BRANCH MASTER DE PROD
+
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.3.
 
 ## Development server
