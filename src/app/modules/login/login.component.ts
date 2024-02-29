@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './services/login.service';
 import Utils from '../../Utils/Utils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
   nmUsuario: string = '';
   lembrarUsuario: boolean = false;
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService
+    , private router: Router) { }
 
   ngOnInit() {
     this.getUsuarios();
@@ -26,7 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   logar(usuario: any) {
-    this.loginService.login(usuario);
+    this.loginService.login(usuario).then(() => this.router.navigateByUrl(''));
   }
 
 }

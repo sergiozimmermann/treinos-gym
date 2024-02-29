@@ -37,6 +37,7 @@ export class CardExercicioAtualComponent implements OnInit {
   }
 
   getRange(value: number): number[] {
+    // Função para simular um array com o número de séries do exercício
     return Array.from({ length: value }, (_, index) => index + 1);
   }
 

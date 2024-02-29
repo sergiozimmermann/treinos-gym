@@ -41,10 +41,13 @@ export class ListaExercicioAtualComponent implements OnInit {
   getExerciciosTreino(treinoAtual: TreinoAtual) {
     this.treinoService.getExerciciosUltimoTreino(treinoAtual.idTreinoPreset).then(treinoAnterior => {
       if (treinoAnterior) {
+        // Se tiver treino anterior, ele substitui os placeholders pelos dados do treino anterior
         this.exerciciosUltimoTreino = Utils.mapResFirebase(treinoAnterior);
       }
+
       this.presetService.getExerciciosPreset(treinoAtual.idTreinoPreset).subscribe(resPreset => {
         const exerciciosPreset = Utils.mapResFirebase(resPreset);
+        // Se estiver atualizando o treino, pega os dados do preset e adiciona os dados (kg, rep) do treino existente
         if (treinoAtual.id) {
           this.treinoService.getExerciciosTreino(treinoAtual.id).subscribe(resDiario => {
             const exerciciosDiarios = Utils.mapResFirebase(resDiario);
@@ -65,6 +68,7 @@ export class ListaExercicioAtualComponent implements OnInit {
           });
         }
         else {
+          // Se estiver adicionando um treino novo, somente adiciona os dados do preset
           this.exerciciosTreino = exerciciosPreset.map((exPreset: any) => {
             const exercicioTreino = new ExercicioTreinoAtual();
             exercicioTreino.idExercicioPreset = exPreset.id;

@@ -17,11 +17,12 @@ export const AuthGuard: CanActivateFn = (route, state) => {
       router.navigateByUrl('/login');
       resolve(false)
       return;
-    })
+    });
   });
 };
 
 export const CanDeactivateGuard: CanDeactivateFn<any> = (component: any) => {
+  // Função para verificar se há informações não salvas antes de mudar de rota
   if (component.isOpen) {
     return inject(ConfirmDiscardChangesService).openConfirmDialog();
   }

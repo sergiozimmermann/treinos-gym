@@ -1,8 +1,10 @@
+<!-- display none serve para não perder as referências do componente ao navegar pelos componentes da rota treinos-diarios -->
 <div [ngClass]="{'display-none': isOpen}">
     <app-historico-treinos-diarios (adicionarTreino)="showAddTreino()"
         (onSelecionarTreino)="abrirTreino($event)"></app-historico-treinos-diarios>
 </div>
 
+<!-- ngIf para perder as referências ao sair do componente editor-treino-diario -->
 <div class="editorTreino" *ngIf="isOpen">
     <app-editor-treino-diario [treinoAtual]="treinoAtual"
         (onSalvarOuCancelar)="isOpen = false"></app-editor-treino-diario>

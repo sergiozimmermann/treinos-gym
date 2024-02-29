@@ -25,6 +25,7 @@ export class EditorTreinoDiarioComponent implements OnInit {
   }
 
   salvarTreino() {
+    // Atualiza ou adiciona o treino com base na existência dele
     if (this.treinoAtual?.id) {
       this.atualizarTreino();
     }

@@ -18,8 +18,9 @@ export class LoginService {
     return this.dataBase.snapshotChanges();
   }
 
-  login(usuario: any) {
-    this.afAuth.signInWithEmailAndPassword(usuario.email, '12345678').then(() => this.router.navigateByUrl(''));
+  login(usuario: any): Promise<any> {
+    // Login com email e senha padrão para cada usuário no banco de dados
+    return this.afAuth.signInWithEmailAndPassword(usuario.email, '12345678');
   }
 
   logout() {

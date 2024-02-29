@@ -4,6 +4,7 @@ import Utils from '../../../../../Utils/Utils';
 import { ExercicioPreset } from '../../../models/ExercicioPreset';
 import { ToastService } from '../../../../../Utils/services/toast/toast.service';
 import { CardExercicioPresetComponent } from './card-exercicio-preset/card-exercicio-preset.component';
+import * as _ from 'lodash'
 
 @Component({
   selector: 'app-lista-exercicios-preset',
@@ -93,9 +94,13 @@ export class ListaExerciciosPresetComponent implements OnInit {
       this.removerExPresets(this.exPresetsDeletados);
     }
     if (this.exPresetsAdicionados.length > 0) {
-      this.addExPresets(this.exPresetsAdicionados);
+      this.addExPresets();
     }
-    const cardsComChange = this.CardsExercicioPreset._results.filter((component: CardExercicioPresetComponent) => component.cardChange === true && component.exercicioPreset.id);
+
+    // Lógica para atualizar o index dos exercícios
+    const cardsComChange = this.exPresetsDeletados.length > 0
+      ? this.CardsExercicioPreset._results.filter((component: CardExercicioPresetComponent) => component.exercicioPreset.id)
+      : this.CardsExercicioPreset._results.filter((component: CardExercicioPresetComponent) => component.cardChange === true && component.exercicioPreset.id);
     const exerciciosDiarios = cardsComChange.map((component: CardExercicioPresetComponent) => component.formulario.getRawValue());
     const promises = exerciciosDiarios.map((exercicio: any) => this.atualizaCadaExercicio(exercicio));
     // Usando Promise.all para aguardar a conclusão de todas as Promises
@@ -128,10 +133,10 @@ export class ListaExerciciosPresetComponent implements OnInit {
     }
   }
 
-  addExPresets(exercicios: any[]) {
-    exercicios.forEach((exercicio: any) => {
-      const cardPreset: CardExercicioPresetComponent = this.CardsExercicioPreset.find((component: CardExercicioPresetComponent) => component.exercicioPreset.id === exercicio.id);
-      const exPreset = cardPreset.formulario.getRawValue();
+  addExPresets() {
+    const presetsNovos: any[] = this.CardsExercicioPreset._results.filter((component: CardExercicioPresetComponent) => !component.exercicioPreset.id);
+    presetsNovos.forEach((component: CardExercicioPresetComponent) => {
+      const exPreset = component.formulario.getRawValue();
       exPreset.idPreset = this.idPreset;
       this.presetService.addExercicioPreset(exPreset);
     });

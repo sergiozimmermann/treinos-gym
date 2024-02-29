@@ -20,4 +20,5 @@ nav-bar {
     position: relative;
     padding: 5px;
     height: calc(100% - 70px - 42px - 10px); // 70px da navbar e 42px do titlebar e 10px do padding 5 do card
+    overflow-y: auto;
 }

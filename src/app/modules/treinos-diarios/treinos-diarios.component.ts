@@ -28,10 +28,12 @@ export class TreinosDiariosComponent implements OnInit {
   }
 
   abrirTreino(event: EventTreino) {
+    // Verifica se está clicando em um botão (deletar)
     if (event.click && ['mdc-button__label', 'mdc-button__label', 'mat-mdc-button-touch-target'].includes(event.click.target.className)) {
       return;
     }
 
+    // cloneDeep para as alterações não serem passadas automaticamente para o componente pai
     this.treinoAtual = _.cloneDeep(event.treino);
     this.isOpen = true;
   }

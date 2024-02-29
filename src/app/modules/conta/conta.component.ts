@@ -39,24 +39,29 @@ export class ContaComponent implements OnInit {
       let usuario: Usuario = new Usuario();
       usuario.nmUsuario = user.displayName
       usuario.uid = user.uid;
+
+      // Atribui os dados do usuário no formulário
       this.formulario.patchValue(usuario);
     });
   }
 
   salvarUsuario() {
+    // Verifica se foi mexido no input
     if (!this.formulario.touched) {
-      this.toastService.showMensagem('Salvo com Sucesso!');
+      this.toastService.showMensagem('Não houve alterações!');
       return;
     }
 
     if (this.formulario.invalid) {
-      this.toastService.showMensagem('Insira seu Nome');
+      this.toastService.showMensagem('Insira seu Nome!');
       return;
     }
 
     const usuario = this.formulario.getRawValue();
     this.contaService.atualizaUsuario(this.usuarioAuth, usuario).then(() => {
       this.toastService.showMensagem('Salvo com Sucesso!');
+
+      // Reinicia a janela para reobter o nome do usuário no title-bar
       window.location.reload();
     }).catch(() => {
       this.toastService.showMensagem('Ocorreu um erro!');

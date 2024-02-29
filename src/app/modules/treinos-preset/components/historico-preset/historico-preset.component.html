@@ -1,2 +1,6 @@
-<app-lista-preset [treinosPreset]="treinosPreset" (onSelecionarPreset)="onSelecionarPreset.emit($event)"
-    (onAddPreset)="onAddPreset.emit($event)"></app-lista-preset>
+<div style="margin: 10px 0;">
+    <button mat-button class="w-full" (click)="adicionarPreset()">Adicionar Preset</button>
+</div>
+
+<app-lista-preset [treinosPreset]="treinosPreset"
+    (onSelecionarPreset)="onSelecionarPreset.emit($event)"></app-lista-preset>

@@ -27,10 +27,13 @@ export class ListaTreinosDiariosComponent implements OnInit {
 
   getTreinosDiarios(filtro?: FiltroTreinos) {
     this.usuarioService.getIdUsuario().then(idUsuario => {
+      // Filtra baseado no id do Usuário
       this.treinoService.getTreinos(idUsuario, filtro).subscribe(res => {
         const resFormatado = Utils.mapResFirebase(res);
         resFormatado.map(treino => treino.dtTreino = new Date(treino.dtTreino.seconds * 1000));
+        // Verifica se está filtrando por nome do treino
         if (filtro && filtro.nmTreino !== '') {
+          // Ignora letras maiúsculas na hora de filtrar
           this.treinosDiarios = resFormatado.filter(treino => treino.nmTreino.toLowerCase().includes(filtro.nmTreino.toLowerCase()));
           return;
         }

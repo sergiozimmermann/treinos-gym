@@ -24,6 +24,17 @@ export class CardExercicioPresetComponent implements OnInit {
     }
   }
 
+  _indexExPreset!: number;
+  get indexExPreset(): number {
+    return this._indexExPreset;
+  }
+  @Input() set indexExPreset(indexExPreset: number) {
+    this._indexExPreset = indexExPreset;
+    if (indexExPreset) {
+      this.formulario.get('indexExPreset')?.setValue(indexExPreset);
+    }
+  }
+
   @Input() readOnly: boolean = false;
 
   @Output() exercicioPresetChange = new EventEmitter();
@@ -38,6 +49,7 @@ export class CardExercicioPresetComponent implements OnInit {
       , qtdSerie: []
       , minRep: []
       , maxRep: []
+      , indexExPreset: []
     });
   }
 

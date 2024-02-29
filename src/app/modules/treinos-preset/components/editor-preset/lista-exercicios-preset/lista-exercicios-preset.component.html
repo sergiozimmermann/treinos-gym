@@ -1,7 +1,7 @@
 <div class="listaCards">
   <ng-container *ngFor="let exercicio of exerciciosPreset; index as i">
-    <app-card-exercicio-preset #CardExercicioPreset [readOnly]="readOnly" [exercicioPreset]="exercicio"
-      (exercicioPresetChange)="exerciciosPreset[i] = $event"
+    <app-card-exercicio-preset #CardExercicioPreset [indexExPreset]="i" [readOnly]="readOnly"
+      [exercicioPreset]="exercicio" (exercicioPresetChange)="exerciciosPreset[i] = $event"
       (onDeleteExercicio)="removerExPreset(exercicio.id, i)"></app-card-exercicio-preset>
   </ng-container>
 </div>
