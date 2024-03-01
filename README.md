@@ -2,11 +2,6 @@
 
 FAZER:
 Bugs:
-nao esta salvando um exercicio novo em um preset ja existente
-
-quando salvo um exercício diário sem peso/rep, o placeholder fica como undefined
-
-scroll está bugado na lista de presets/treinos
 
 
 Implementações:
