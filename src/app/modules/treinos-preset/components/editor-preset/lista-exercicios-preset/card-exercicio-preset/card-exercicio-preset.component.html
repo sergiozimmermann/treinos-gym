@@ -1,33 +1,100 @@
 <form [formGroup]="formulario" class="cardExercicio flex flex-column">
     <div class="form-group">
-        <label>Nome Exercício</label>
-        <input #InputNmExercicio type="text" formControlName="nmExercicio" (change)="onChangeInputs()"
+        <label for="nmExercicio">Nome Exercício</label>
+        <input #InputNmExercicio type="text" id="nmExercicio" formControlName="nmExercicio" (change)="onChangeInputs()"
             [readonly]="readOnly" (focus)="InputNmExercicio.select()">
     </div>
     <div class="form-group">
-        <label>Obs.</label>
-        <textarea #InputObs formControlName="obsExercicio" (change)="onChangeInputs()" [readonly]="readOnly"
-            (focus)="InputObs.select()"></textarea>
+        <label for="obsExercicio">Obs.</label>
+        <textarea #InputObs id="obsExercicio" formControlName="obsExercicio" (change)="onChangeInputs()"
+            [readonly]="readOnly" (focus)="InputObs.select()"></textarea>
     </div>
-    <div class="form-group flex-row" style="column-gap: 10px">
-        <div class="form-group align-items-end">
-            <label>Qtd. Séries</label>
-            <input #InputQtdSeries type="number" formControlName="qtdSerie" (change)="onChangeInputs()"
-                [readonly]="readOnly" (focus)="InputQtdSeries.select()">
-        </div>
-        <div class="form-group flex-row align-items-end" style="column-gap: 10px;">
-            <div>
-                <label>Min. Rep.</label>
-                <input #InputMinRep type="number" formControlName="minRep" (change)="onChangeInputs()"
-                    [readonly]="readOnly" (focus)="InputMinRep.select()">
-            </div>
-            <div>
-                <label>Max. Rep.</label>
-                <input #InputMaxRep type="number" formControlName="maxRep" (change)="onChangeInputs()"
-                    [readonly]="readOnly" (focus)="InputMaxRep.select()">
-            </div>
-        </div>
+    <div class="form-group">
+        <mat-radio-group aria-label="Select an option" formControlName="tpExercicio">
+            <mat-radio-button [value]="1">Normal</mat-radio-button>
+            <mat-radio-button [value]="2">Biset</mat-radio-button>
+            <mat-radio-button [value]="3">Dropset</mat-radio-button>
+        </mat-radio-group>
     </div>
+    <ng-container *ngIf="tpExercicio == 1">
+        <div class="form-group flex-row" style="column-gap: 10px">
+            <div class="form-group align-items-end">
+                <label for="qtdSerie">Qtd. Séries</label>
+                <input #InputQtdSeries type="number" id="qtdSerie" formControlName="qtdSerie"
+                    (change)="onChangeInputs()" [readonly]="readOnly" (focus)="InputQtdSeries.select()">
+            </div>
+            <div class="flex align-items-end" style="column-gap: 10px;">
+                <div>
+                    <label for="minRep">Min. Rep.</label>
+                    <input #InputMinRep type="number" id="minRep" formControlName="minRep" (change)="onChangeInputs()"
+                        [readonly]="readOnly" (focus)="InputMinRep.select()">
+                </div>
+                <div>
+                    <label for="maxRep">Max. Rep.</label>
+                    <input #InputMaxRep type="number" id="maxRep" formControlName="maxRep" (change)="onChangeInputs()"
+                        [readonly]="readOnly" (focus)="InputMaxRep.select()">
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="tpExercicio == 2">
+        <div class="flex" style="margin-bottom: 15px;">
+            <div class="align-items-end" style="width: 50%;">
+                <label for="qtdSerie">Qtd. Séries</label>
+                <input #InputQtdSeries type="number" id="qtdSerie" formControlName="qtdSerie"
+                    (change)="onChangeInputs()" [readonly]="readOnly" (focus)="InputQtdSeries.select()">
+            </div>
+        </div>
+        <div class="flex justify-content-center">
+            <span class="border-title">Set 1</span>
+        </div>
+        <div class="form-group border" style="row-gap: 5px;">
+            <div class="form-group">
+                <label for="nmSet1">Nome Set 1</label>
+                <input #InputNmSet1 type="text" id="nmSet1" formControlName="nmSet1" (change)="onChangeInputs()"
+                    [readOnly]="readOnly" (focus)="InputNmSet1.select()">
+            </div>
+            <div class="flex align-items-end" style="column-gap: 10px;">
+                <div>
+                    <label for="minRepBiset1">Min. Rep.</label>
+                    <input #InputMinRepBiset1 type="number" id="minRepBiset1" formControlName="minRepBiset1"
+                        (change)="onChangeInputs()" [readonly]="readOnly" (focus)="InputMinRepBiset1.select()">
+                </div>
+                <div>
+                    <label for="maxRepBiset1">Max. Rep.</label>
+                    <input #InputMaxRepBiset1 type="number" id="maxRepBiset1" formControlName="maxRepBiset1"
+                        (change)="onChangeInputs()" [readonly]="readOnly" (focus)="InputMaxRepBiset1.select()">
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-content-center">
+            <span class="border-title">Set 2</span>
+        </div>
+        <div class="form-group border" style="row-gap: 5px;">
+            <div class="form-group">
+                <label for="nmSet2">Nome Set 2</label>
+                <input #InputNmSet2 type="text" id="nmSet2" formControlName="nmSet2" (change)="onChangeInputs()"
+                    [readOnly]="readOnly" (focus)="InputNmSet2.select()">
+            </div>
+            <div class="flex align-items-end" style="column-gap: 10px;">
+                <div>
+                    <label for="minRepBiset2">Min. Rep.</label>
+                    <input #InputMinRepBiset2 type="number" id="minRepBiset2" formControlName="minRepBiset2"
+                        (change)="onChangeInputs()" [readonly]="readOnly" (focus)="InputMinRepBiset2.select()">
+                </div>
+                <div>
+                    <label for="maxRepBiset2">Max. Rep.</label>
+                    <input #InputMaxRepBiset2 type="number" id="maxRepBiset2" formControlName="maxRepBiset2"
+                        (change)="onChangeInputs()" [readonly]="readOnly" (focus)="InputMaxRepBiset2.select()">
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="tpExercicio == 3">
+        b
+    </ng-container>
     <div *ngIf="!readOnly">
         <button mat-button class="w-full warn" style="margin-top: 10px;"
             (click)="onDeleteExercicio.emit()">Deletar</button>

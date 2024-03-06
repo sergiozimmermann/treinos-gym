@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TreinosPresetRoutingModule } from './treinos-preset-routing.module';
+import { MatRadioModule } from "@angular/material/radio";
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { TreinosPresetRoutingModule } from './treinos-preset-routing.module';
     , MatInputModule
     , FormsModule
     , ReactiveFormsModule
+    , MatRadioModule
   ],
   declarations: [
     TreinosPresetComponent

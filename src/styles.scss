@@ -250,3 +250,33 @@ mat-dialog-content {
     color: var(--font-color) !important;
     padding: 10px;
 }
+
+mat-radio-group {
+    justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.mdc-label {
+    color: var(--font-color) !important;
+}
+
+.mat-mdc-radio-button.mat-accent {
+    --mdc-radio-selected-focus-icon-color: var(--secondary-color) !important;
+    --mdc-radio-selected-hover-icon-color: var(--secondary-color) !important;
+    --mdc-radio-selected-icon-color: var(--secondary-color) !important;
+    --mdc-radio-selected-pressed-icon-color: var(--secondary-color) !important;
+    --mat-radio-checked-ripple-color: var(--secondary-color) !important;
+    --mdc-radio-unselected-hover-icon-color: var(--font-color) !important;
+    --mdc-radio-disabled-selected-icon-color: var(--font-color) !important;
+    --mdc-radio-disabled-unselected-icon-color: var(--font-color) !important;
+    --mat-radio-ripple-color: var(--font-color) !important;
+}
+
+.mat-mdc-radio-button .mdc-radio {
+    padding-right: 5px !important;
+}
+
+.mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled:not(:checked)+.mdc-radio__background .mdc-radio__outer-circle {
+    border-color: var(--font-color) !important;
+}

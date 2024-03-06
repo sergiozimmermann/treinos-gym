@@ -5,5 +5,19 @@
             border-radius: 10px;
             padding: 10px;
         }
+
+        .border {
+            border: 2px solid var(--font-color);
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .border-title {
+            background-color: var(--background);
+            padding: 0 10px;
+            position: relative;
+            top: 13px;
+            margin-top: -15px;
+        }
     }
 }
