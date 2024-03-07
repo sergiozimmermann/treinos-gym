@@ -14,7 +14,6 @@
 
 input[type="number"] {
     margin-left: 10px;
-    text-align: right;
 }
 
 .pesoKg {
@@ -58,4 +57,18 @@ input[type="number"] {
 
 .rangeRep {
     margin-top: 5px;
+}
+
+.border {
+    border: 2px solid var(--font-color);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.border-title {
+    background-color: var(--background);
+    padding: 0 10px;
+    position: relative;
+    top: 13px;
+    margin-top: -15px;
 }

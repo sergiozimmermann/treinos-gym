@@ -8,4 +8,13 @@ export class ExercicioTreinoAtual {
     nmExercicio!: string;
     obsExercicio!: string;
     minMaxRep!: string;
+    tpExercicio: number = 1;
+    nmSet1?: string;
+    minMaxRepBiset1?: string;
+    qtdRepBiset1: Array<number> = [];
+    pesoKgBiset1: number[] = [];
+    nmSet2?: string;
+    minMaxRepBiset2?: string;
+    qtdRepBiset2: number[] = [];
+    pesoKgBiset2: number[] = [];
 }

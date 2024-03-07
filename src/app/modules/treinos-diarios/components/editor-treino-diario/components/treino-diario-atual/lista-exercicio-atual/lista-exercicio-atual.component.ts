@@ -5,6 +5,7 @@ import { TreinosPresetService } from '../../../../../../treinos-preset/services/
 import { ExercicioTreinoAtual } from '../../../../../models/ExercicioTreinoAtual';
 import { CardExercicioAtualComponent } from './card-exercicio-atual/card-exercicio-atual.component';
 import { TreinoAtual } from '../../../../../models/TreinoAtual';
+import { TipoExercicio } from '../../../../../../../Utils/Enum/TipoExercicio.enum';
 
 @Component({
   selector: 'app-lista-exercicio-atual',
@@ -63,6 +64,18 @@ export class ListaExercicioAtualComponent implements OnInit {
               exercicioTreino.nmExercicio = exPreset.nmExercicio;
               exercicioTreino.obsExercicio = exPreset.obsExercicio;
               exercicioTreino.minMaxRep = exPreset.minRep + '-' + exPreset.maxRep;
+              exercicioTreino.tpExercicio = exPreset.tpExercicio ?? 1;
+
+              if (exPreset.tpExercicio === TipoExercicio.BISET) {
+                exercicioTreino.qtdRepBiset1 = exercicio.qtdRepBiset1;
+                exercicioTreino.pesoKgBiset1 = exercicio.pesoKgBiset1;
+                exercicioTreino.qtdRepBiset2 = exercicio.qtdRepBiset2;
+                exercicioTreino.pesoKgBiset2 = exercicio.pesoKgBiset2;
+                exercicioTreino.nmSet1 = exPreset.nmSet1;
+                exercicioTreino.nmSet2 = exPreset.nmSet2;
+                exercicioTreino.minMaxRepBiset1 = exPreset.minRepBiset1 + '-' + exPreset.maxRepBiset1;
+                exercicioTreino.minMaxRepBiset2 = exPreset.minRepBiset2 + '-' + exPreset.maxRepBiset2;
+              }
               return exercicioTreino;
             });
           });
@@ -76,6 +89,14 @@ export class ListaExercicioAtualComponent implements OnInit {
             exercicioTreino.nmExercicio = exPreset.nmExercicio;
             exercicioTreino.obsExercicio = exPreset.obsExercicio;
             exercicioTreino.minMaxRep = exPreset.minRep + '-' + exPreset.maxRep;
+            exercicioTreino.tpExercicio = exPreset.tpExercicio ?? 1;
+
+            if (exPreset.tpExercicio === TipoExercicio.BISET) {
+              exercicioTreino.nmSet1 = exPreset.nmSet1;
+              exercicioTreino.nmSet2 = exPreset.nmSet2;
+              exercicioTreino.minMaxRepBiset1 = exPreset.minRepBiset1 + '-' + exPreset.maxRepBiset1;
+              exercicioTreino.minMaxRepBiset2 = exPreset.minRepBiset2 + '-' + exPreset.maxRepBiset2;
+            }
             return exercicioTreino;
           });
         }
@@ -89,7 +110,11 @@ export class ListaExercicioAtualComponent implements OnInit {
         idTreino: idTreino,
         idExercicioPreset: exercicio.idExercicioPreset,
         pesoKg: exercicio.pesoKg,
-        qtdRep: exercicio.qtdRep
+        qtdRep: exercicio.qtdRep,
+        pesoKgBiset1: exercicio.pesoKgBiset1,
+        pesoKgBiset2: exercicio.pesoKgBiset2,
+        qtdRepBiset1: exercicio.qtdRepBiset1,
+        qtdRepBiset2: exercicio.qtdRepBiset2
       }
       this.treinoService.addExercicioDiario(exTreino).then(() => {
         resolve();
@@ -109,7 +134,11 @@ export class ListaExercicioAtualComponent implements OnInit {
       let exTreino = {
         id: exercicio.id,
         pesoKg: exercicio.pesoKg,
-        qtdRep: exercicio.qtdRep
+        qtdRep: exercicio.qtdRep,
+        pesoKgBiset1: exercicio.pesoKgBiset1,
+        pesoKgBiset2: exercicio.pesoKgBiset2,
+        qtdRepBiset1: exercicio.qtdRepBiset1,
+        qtdRepBiset2: exercicio.qtdRepBiset2
       }
       this.treinoService.atualizarExercicioDiario(exTreino).then(() => {
         resolve();

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ExercicioTreinoAtual } from '../../../../../../models/ExercicioTreinoAtual';
+import { TipoExercicio } from '../../../../../../../../Utils/Enum/TipoExercicio.enum';
 
 @Component({
   selector: 'app-card-exercicio-atual',
