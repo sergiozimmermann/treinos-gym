@@ -49,7 +49,7 @@ export class TreinosDiariosService {
   }
 
   getExerciciosTreino(idTreino: string): Observable<any> {
-    return this.afs.collection('Exercicios_Diarios', ref => ref.where('idTreino', '==', idTreino)).snapshotChanges();
+    return this.afs.collection('Exercicios_Diarios', ref => ref.where('idTreino', '==', idTreino).orderBy('indexExPreset')).snapshotChanges();
   }
 
   getExerciciosUltimoTreino(idTreinoPreset: string): Promise<any> {

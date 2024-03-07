@@ -45,39 +45,18 @@ export class ListaExercicioAtualComponent implements OnInit {
         // Se tiver treino anterior, ele substitui os placeholders pelos dados do treino anterior
         this.exerciciosUltimoTreino = Utils.mapResFirebase(treinoAnterior);
       }
-
       this.presetService.getExerciciosPreset(treinoAtual.idTreinoPreset).subscribe(resPreset => {
         const exerciciosPreset = Utils.mapResFirebase(resPreset);
-        // Se estiver atualizando o treino, pega os dados do preset e adiciona os dados (kg, rep) do treino existente
+
         if (treinoAtual.id) {
           this.treinoService.getExerciciosTreino(treinoAtual.id).subscribe(resDiario => {
-            const exerciciosDiarios = Utils.mapResFirebase(resDiario);
-            this.exerciciosTreino = exerciciosPreset.map((exPreset: any) => {
-              const exercicio = exerciciosDiarios.find(ex => ex.idExercicioPreset === exPreset.id);
-              const exercicioTreino = new ExercicioTreinoAtual();
-              exercicioTreino.id = exercicio.id;
-              exercicioTreino.idTreino = exercicio.idTreino;
-              exercicioTreino.qtdRep = exercicio.qtdRep;
-              exercicioTreino.pesoKg = exercicio.pesoKg;
-              exercicioTreino.idExercicioPreset = exPreset.id;
-              exercicioTreino.qtdSerie = exPreset.qtdSerie;
-              exercicioTreino.nmExercicio = exPreset.nmExercicio;
-              exercicioTreino.obsExercicio = exPreset.obsExercicio;
-              exercicioTreino.minMaxRep = exPreset.minRep + '-' + exPreset.maxRep;
-              exercicioTreino.tpExercicio = exPreset.tpExercicio ?? 1;
-
-              if (exPreset.tpExercicio === TipoExercicio.BISET) {
-                exercicioTreino.qtdRepBiset1 = exercicio.qtdRepBiset1;
-                exercicioTreino.pesoKgBiset1 = exercicio.pesoKgBiset1;
-                exercicioTreino.qtdRepBiset2 = exercicio.qtdRepBiset2;
-                exercicioTreino.pesoKgBiset2 = exercicio.pesoKgBiset2;
-                exercicioTreino.nmSet1 = exPreset.nmSet1;
-                exercicioTreino.nmSet2 = exPreset.nmSet2;
-                exercicioTreino.minMaxRepBiset1 = exPreset.minRepBiset1 + '-' + exPreset.maxRepBiset1;
-                exercicioTreino.minMaxRepBiset2 = exPreset.minRepBiset2 + '-' + exPreset.maxRepBiset2;
-              }
-              return exercicioTreino;
-            });
+            this.exerciciosTreino = Utils.mapResFirebase(resDiario);
+            // this.exerciciosTreino = exerciciosPreset.map(exPreset => {
+            //   const exercicio = exercicios.find(ex => ex.idExercicioPreset === exPreset.id);
+            //   exercicio.indexExPreset = exPreset.indexExPreset;
+            //   return exercicio;
+            // });
+            // const exercicioTreino = new ExercicioTreinoAtual();
           });
         }
         else {
@@ -106,15 +85,28 @@ export class ListaExercicioAtualComponent implements OnInit {
 
   addCadaExercicio(exercicio: any, idTreino: string) {
     return new Promise<void>((resolve) => {
-      let exTreino = {
+      let exTreino: any = {
         idTreino: idTreino,
         idExercicioPreset: exercicio.idExercicioPreset,
         pesoKg: exercicio.pesoKg,
         qtdRep: exercicio.qtdRep,
-        pesoKgBiset1: exercicio.pesoKgBiset1,
-        pesoKgBiset2: exercicio.pesoKgBiset2,
-        qtdRepBiset1: exercicio.qtdRepBiset1,
-        qtdRepBiset2: exercicio.qtdRepBiset2
+        qtdSerie: exercicio.qtdSerie,
+        nmExercicio: exercicio.nmExercicio,
+        obsExercicio: exercicio.obsExercicio,
+        minMaxRep: exercicio.minMaxRep,
+        tpExercicio: exercicio.tpExercicio ?? 1,
+        indexExPreset: exercicio.indexExPreset
+      }
+
+      if (exercicio.tpExercicio === TipoExercicio.BISET) {
+        exTreino.nmSet1 = exercicio.nmSet1;
+        exTreino.nmSet2 = exercicio.nmSet2;
+        exTreino.pesoKgBiset1 = exercicio.pesoKgBiset1;
+        exTreino.pesoKgBiset2 = exercicio.pesoKgBiset2;
+        exTreino.qtdRepBiset1 = exercicio.qtdRepBiset1;
+        exTreino.qtdRepBiset2 = exercicio.qtdRepBiset2;
+        exTreino.minMaxRepBiset1 = exercicio.minMaxRepBiset1;
+        exTreino.minMaxRepBiset2 = exercicio.minMaxRepBiset2;
       }
       this.treinoService.addExercicioDiario(exTreino).then(() => {
         resolve();
@@ -131,14 +123,29 @@ export class ListaExercicioAtualComponent implements OnInit {
 
   atualizaCadaExercicio(exercicio: any) {
     return new Promise<void>((resolve) => {
-      let exTreino = {
+      let exTreino: any = {
         id: exercicio.id,
         pesoKg: exercicio.pesoKg,
         qtdRep: exercicio.qtdRep,
-        pesoKgBiset1: exercicio.pesoKgBiset1,
-        pesoKgBiset2: exercicio.pesoKgBiset2,
-        qtdRepBiset1: exercicio.qtdRepBiset1,
-        qtdRepBiset2: exercicio.qtdRepBiset2
+        idTreino: exercicio.idTreino,
+        idExercicioPreset: exercicio.idExercicioPreset,
+        qtdSerie: exercicio.qtdSerie,
+        nmExercicio: exercicio.nmExercicio,
+        obsExercicio: exercicio.obsExercicio,
+        minMaxRep: exercicio.minMaxRep,
+        tpExercicio: exercicio.tpExercicio ?? 1,
+        indexExPreset: exercicio.indexExPreset
+      }
+
+      if (exercicio.tpExercicio === TipoExercicio.BISET) {
+        exTreino.nmSet1 = exercicio.nmSet1;
+        exTreino.nmSet2 = exercicio.nmSet2;
+        exTreino.pesoKgBiset1 = exercicio.pesoKgBiset1;
+        exTreino.pesoKgBiset2 = exercicio.pesoKgBiset2;
+        exTreino.qtdRepBiset1 = exercicio.qtdRepBiset1;
+        exTreino.qtdRepBiset2 = exercicio.qtdRepBiset2;
+        exTreino.minMaxRepBiset1 = exercicio.minMaxRepBiset1;
+        exTreino.minMaxRepBiset2 = exercicio.minMaxRepBiset2;
       }
       this.treinoService.atualizarExercicioDiario(exTreino).then(() => {
         resolve();
