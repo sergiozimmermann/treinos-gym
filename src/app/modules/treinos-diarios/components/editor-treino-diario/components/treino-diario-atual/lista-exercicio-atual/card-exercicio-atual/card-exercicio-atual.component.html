@@ -5,6 +5,8 @@
   <div class="obsExercicio">
     <span>Obs: {{exercicio.obsExercicio}}</span>
   </div>
+
+  <!-- NORMAL -->
   <ng-container *ngIf="exercicio.tpExercicio === 1">
     <div class="flex justify-content-end rangeRep">
       <label>Range Rep: </label>
@@ -30,6 +32,7 @@
     </div>
   </ng-container>
 
+  <!-- BISET -->
   <ng-container *ngIf="exercicio.tpExercicio === 2">
     <div class="flex justify-content-center" style="font-size: 22px; margin: 10px 0;">
       <span>Biset</span>
@@ -95,6 +98,7 @@
     </div>
   </ng-container>
 
+  <!-- DROPSET -->
   <ng-container *ngIf="exercicio.tpExercicio === 3">
     b
   </ng-container>

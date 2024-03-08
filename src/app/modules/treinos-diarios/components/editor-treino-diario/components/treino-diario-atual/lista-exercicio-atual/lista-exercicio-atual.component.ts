@@ -51,12 +51,6 @@ export class ListaExercicioAtualComponent implements OnInit {
         if (treinoAtual.id) {
           this.treinoService.getExerciciosTreino(treinoAtual.id).subscribe(resDiario => {
             this.exerciciosTreino = Utils.mapResFirebase(resDiario);
-            // this.exerciciosTreino = exerciciosPreset.map(exPreset => {
-            //   const exercicio = exercicios.find(ex => ex.idExercicioPreset === exPreset.id);
-            //   exercicio.indexExPreset = exPreset.indexExPreset;
-            //   return exercicio;
-            // });
-            // const exercicioTreino = new ExercicioTreinoAtual();
           });
         }
         else {

@@ -16,8 +16,10 @@
             <mat-radio-button [disabled]="readOnly" [value]="3">Dropset</mat-radio-button>
         </mat-radio-group>
     </div>
-    <ng-container *ngIf="tpExercicio == 1">
-        <div class="form-group flex-row" style="column-gap: 10px">
+
+    <!-- NORMAL -->
+    <ng-container *ngIf="tpExercicio === 1">
+        <div class="flex align-items-end" style="column-gap: 10px">
             <div class="form-group align-items-end">
                 <label for="qtdSerie">Qtd. Séries</label>
                 <input #InputQtdSeries type="number" id="qtdSerie" formControlName="qtdSerie"
@@ -37,7 +39,9 @@
             </div>
         </div>
     </ng-container>
-    <ng-container *ngIf="tpExercicio == 2">
+
+    <!-- BISET -->
+    <ng-container *ngIf="tpExercicio === 2">
         <div class="flex" style="margin-bottom: 15px;">
             <div class="align-items-end" style="width: 50%;">
                 <label for="qtdSerie">Qtd. Séries</label>
@@ -92,9 +96,41 @@
         </div>
     </ng-container>
 
-    <ng-container *ngIf="tpExercicio == 3">
-        b
+    <!-- DROPSET -->
+    <ng-container *ngIf="tpExercicio === 3">
+        <div class="flex" style="margin-bottom: 15px; column-gap: 10px;">
+            <div class="align-items-end">
+                <label for="qtdSerie">Qtd. Séries</label>
+                <input #InputQtdSeries type="number" id="qtdSerie" formControlName="qtdSerie"
+                    (change)="onChangeInputs()" [readonly]="readOnly" (focus)="InputQtdSeries.select()">
+            </div>
+            <div class="align-items-end">
+                <label for="qtdDrop">Qtd. Drop</label>
+                <input #InputQtdDrop type="number" id="qtdDrop" formControlName="qtdDrop" (change)="onChangeInputs()"
+                    [readOnly]="readOnly" (focus)="InputQtdDrop.select()">
+            </div>
+        </div>
+        <div class="form-group" style="row-gap: 10px;">
+            <div *ngFor="let control of getControls('minRepsDrop'); index as i" class="flex align-items-end border"
+                style="column-gap: 10px;">
+                <div class="drop-span">
+                    <span>Drop {{i + 1}}:</span>
+                </div>
+                <div>
+                    <label for="minRepsDrop{{i}}">Min. Rep.</label>
+                    <input #InputMinRepsDrop type="number" id="minRepsDrop{{i}}" [formControl]="$any(control)"
+                        (change)="onChangeInputs()" [readonly]="readOnly" (focus)="InputMinRepsDrop.select()">
+                </div>
+                <div>
+                    <label for="maxRepsDrop{{i}}">Max. Rep.</label>
+                    <input #InputmMaxRepsDrop type="number" id="maxRepsDrop{{i}}"
+                        [formControl]="$any(getControls('maxRepsDrop')[i])" (change)="onChangeInputs()"
+                        [readonly]="readOnly" (focus)="InputmMaxRepsDrop.select()">
+                </div>
+            </div>
+        </div>
     </ng-container>
+
     <div *ngIf="!readOnly">
         <button mat-button class="w-full warn" style="margin-top: 10px;"
             (click)="onDeleteExercicio.emit()">Deletar</button>

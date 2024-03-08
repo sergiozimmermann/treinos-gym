@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChildren } from '@a
 import { TreinosPresetService } from '../../../services/treinos-preset.service';
 import Utils from '../../../../../Utils/Utils';
 import { ExercicioPreset } from '../../../models/ExercicioPreset';
-import { ToastService } from '../../../../../Utils/services/toast/toast.service';
 import { CardExercicioPresetComponent } from './card-exercicio-preset/card-exercicio-preset.component';
 import * as _ from 'lodash'
 
@@ -46,8 +45,7 @@ export class ListaExerciciosPresetComponent implements OnInit {
 
   @Output() salvarPreset = new EventEmitter();
 
-  constructor(private presetService: TreinosPresetService
-    , private toastService: ToastService) { }
+  constructor(private presetService: TreinosPresetService) { }
 
   ngOnInit() {
   }
