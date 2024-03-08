@@ -43,14 +43,28 @@ export class ListaExercicioAtualComponent implements OnInit {
     this.treinoService.getExerciciosUltimoTreino(treinoAtual.idTreinoPreset).then(treinoAnterior => {
       if (treinoAnterior) {
         // Se tiver treino anterior, ele substitui os placeholders pelos dados do treino anterior
-        this.exerciciosUltimoTreino = Utils.mapResFirebase(treinoAnterior);
+        const exerciciosUltTreino: any = Utils.mapResFirebase(treinoAnterior);
+        exerciciosUltTreino.forEach((ex: any) => {
+          if (ex.tpExercicio === TipoExercicio.DROPSET) {
+            ex.pesoKgDrops = ex.pesoKgDrops.map((obj: any) => obj.valores);
+            ex.qtdRepDrops = ex.qtdRepDrops.map((obj: any) => obj.valores);
+          }
+        });
+        this.exerciciosUltimoTreino = exerciciosUltTreino;
       }
       this.presetService.getExerciciosPreset(treinoAtual.idTreinoPreset).subscribe(resPreset => {
         const exerciciosPreset = Utils.mapResFirebase(resPreset);
 
         if (treinoAtual.id) {
           this.treinoService.getExerciciosTreino(treinoAtual.id).subscribe(resDiario => {
-            this.exerciciosTreino = Utils.mapResFirebase(resDiario);
+            const exercicios: any = Utils.mapResFirebase(resDiario);
+            exercicios.forEach((ex: any) => {
+              if (ex.tpExercicio === TipoExercicio.DROPSET) {
+                ex.pesoKgDrops = ex.pesoKgDrops.map((obj: any) => obj.valores);
+                ex.qtdRepDrops = ex.qtdRepDrops.map((obj: any) => obj.valores);
+              }
+            });
+            this.exerciciosTreino = exercicios;
           });
         }
         else {
@@ -58,6 +72,8 @@ export class ListaExercicioAtualComponent implements OnInit {
           this.exerciciosTreino = exerciciosPreset.map((exPreset: any) => {
             const exercicioTreino = new ExercicioTreinoAtual();
             exercicioTreino.idExercicioPreset = exPreset.id;
+            exercicioTreino.idTreino = exPreset.idTreino;
+            exercicioTreino.indexExPreset = exPreset.indexExPreset;
             exercicioTreino.qtdSerie = exPreset.qtdSerie;
             exercicioTreino.nmExercicio = exPreset.nmExercicio;
             exercicioTreino.obsExercicio = exPreset.obsExercicio;
@@ -69,6 +85,13 @@ export class ListaExercicioAtualComponent implements OnInit {
               exercicioTreino.nmSet2 = exPreset.nmSet2;
               exercicioTreino.minMaxRepBiset1 = exPreset.minRepBiset1 + '-' + exPreset.maxRepBiset1;
               exercicioTreino.minMaxRepBiset2 = exPreset.minRepBiset2 + '-' + exPreset.maxRepBiset2;
+            }
+
+            if (exPreset.tpExercicio === TipoExercicio.DROPSET) {
+              exercicioTreino.qtdDrop = exPreset.qtdDrop;
+              exercicioTreino.minMaxRepDrops = exPreset.minRepsDrop.map((minRep: number, i: number) => {
+                return minRep + '-' + exPreset.maxRepsDrop[i];
+              });
             }
             return exercicioTreino;
           });
@@ -101,6 +124,19 @@ export class ListaExercicioAtualComponent implements OnInit {
         exTreino.qtdRepBiset2 = exercicio.qtdRepBiset2;
         exTreino.minMaxRepBiset1 = exercicio.minMaxRepBiset1;
         exTreino.minMaxRepBiset2 = exercicio.minMaxRepBiset2;
+      }
+
+      if (exercicio.tpExercicio === TipoExercicio.DROPSET) {
+        exTreino.qtdDrop = exercicio.qtdDrop;
+        exTreino.minMaxRepDrops = exercicio.minMaxRepDrops;
+
+        // Formata a variável para conseguir inserir no firebase
+        exTreino.pesoKgDrops = exercicio.pesoKgDrops.map((arr: any) => {
+          return { valores: arr };
+        });
+        exTreino.qtdRepDrops = exercicio.qtdRepDrops.map((arr: any) => {
+          return { valores: arr };
+        });
       }
       this.treinoService.addExercicioDiario(exTreino).then(() => {
         resolve();
@@ -140,6 +176,13 @@ export class ListaExercicioAtualComponent implements OnInit {
         exTreino.qtdRepBiset2 = exercicio.qtdRepBiset2;
         exTreino.minMaxRepBiset1 = exercicio.minMaxRepBiset1;
         exTreino.minMaxRepBiset2 = exercicio.minMaxRepBiset2;
+      }
+
+      if (exercicio.tpExercicio === TipoExercicio.DROPSET) {
+        exTreino.qtdDrop = exercicio.qtdDrop;
+        exTreino.minMaxRepDrops = exercicio.minMaxRepDrops;
+        exTreino.pesoKgDrops = exercicio.pesoKgDrops;
+        exTreino.qtdRepDrops = exercicio.qtdRepDrops;
       }
       this.treinoService.atualizarExercicioDiario(exTreino).then(() => {
         resolve();

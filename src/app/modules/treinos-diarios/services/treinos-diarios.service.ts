@@ -61,7 +61,7 @@ export class TreinosDiariosService {
         }
 
         const idUltimoTreino = res.docs[0].id;
-        this.afs.collection('Exercicios_Diarios', ref => ref.where('idTreino', '==', idUltimoTreino)).snapshotChanges().subscribe(ultimosExercicios => resolve(ultimosExercicios));
+        this.afs.collection('Exercicios_Diarios', ref => ref.where('idTreino', '==', idUltimoTreino).orderBy('indexExPreset')).snapshotChanges().subscribe(ultimosExercicios => resolve(ultimosExercicios));
       }, error => reject(error));
     });
   }

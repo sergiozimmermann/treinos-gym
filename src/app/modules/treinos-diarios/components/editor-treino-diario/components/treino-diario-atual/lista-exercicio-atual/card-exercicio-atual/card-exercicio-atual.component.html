@@ -100,6 +100,38 @@
 
   <!-- DROPSET -->
   <ng-container *ngIf="exercicio.tpExercicio === 3">
-    b
+    <div class="form-group" style="margin-top: 10px; row-gap: 10px;">
+      <div *ngFor="let item of getRange(exercicio.qtdSerie); index as i">
+        <div class="flex justify-content-center" style="margin-bottom: 10px;">
+          <span class="border-title">{{i + 1}}ª Série</span>
+        </div>
+        <div class="form-group border" style="row-gap: 5px;">
+          <div class="form-group border" *ngFor="let drop of getRange(exercicio.qtdDrop); index as iD">
+            <div class="flex justify-content-end">
+              <span>Range Rep: {{exercicio.minMaxRepDrops[iD]}}</span>
+            </div>
+            <div class="flex align-items-end" style="column-gap: 10px;">
+              <div class="drop-span">
+                <span>Drop {{iD + 1}}: </span>
+              </div>
+              <div>
+                <label for="'pesoKgDrops'{{i}}{{iD}}">Peso (Kg):</label>
+                <input #InputPesoKgDrops id="''pesoKgDrops'{{i}}{{iD}}'" type="number" style="margin: 0;"
+                  [(ngModel)]="exercicio.pesoKgDrops[i][iD]"
+                  [placeholder]="placeholderExercicios ? ((placeholderExercicios!.pesoKgDrops[i] && placeholderExercicios!.pesoKgDrops[i][iD] ? placeholderExercicios!.pesoKgDrops[i][iD] : 0) || 0) : 0"
+                  (focus)="InputPesoKgDrops.select()" (change)="cardChange = true">
+              </div>
+              <div>
+                <label for="'qtdRepDrops{{i}}{{iD}}'">Qtd. Rep:</label>
+                <input #InputQtdRepDrops id="'qtdRepDrops{{i}}{{iD}}'" type="number" style="margin: 0;"
+                  [(ngModel)]="exercicio.qtdRepDrops[i][iD]"
+                  [placeholder]="placeholderExercicios ? ((placeholderExercicios!.qtdRepDrops[i] && placeholderExercicios!.qtdRepDrops[i][iD] ? placeholderExercicios.qtdRepDrops[i][iD] : 0) || 0) : 0"
+                  (focus)="InputQtdRepDrops.select()" (change)="cardChange = true">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </ng-container>
 </div>
