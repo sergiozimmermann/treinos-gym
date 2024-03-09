@@ -18,13 +18,13 @@
         <div class="flex pesoKg">
           <label [for]="'pesoKg' + $index">Peso (Kg):</label>
           <input #InputPesoKg [id]="'pesoKg' + $index" type="number" [(ngModel)]="exercicio.pesoKg[$index]"
-            [placeholder]="placeholderExercicios ? (placeholderExercicios!.pesoKg[$index] || 0) : 0"
+            [placeholder]="placeholderExercicios ? ((placeholderExercicios!.pesoKg ? placeholderExercicios!.pesoKg[$index] : 0) || 0) : 0"
             (focus)="InputPesoKg.select()" (change)="cardChange = true">
         </div>
         <div class="flex qtdRep">
           <label [for]="'qtdRep' + $index">Qtd. Rep:</label>
           <input #InputQtdRep [id]="'qtdRep' + $index" type="number" [(ngModel)]="exercicio.qtdRep[$index]"
-            [placeholder]="placeholderExercicios ? (placeholderExercicios!.qtdRep[$index] || 0) : 0"
+            [placeholder]="placeholderExercicios ? ((placeholderExercicios!.qtdRep ? placeholderExercicios!.qtdRep[$index] : 0) || 0) : 0"
             (focus)="InputQtdRep.select()" (change)="cardChange = true">
         </div>
       </div>
@@ -52,14 +52,14 @@
             <label [for]="'pesoKgBiset1' + $index">Peso (Kg):</label>
             <input #InputPesoKgBiset1 [id]="'pesoKgBiset1' + $index" type="number"
               [(ngModel)]="exercicio.pesoKgBiset1[$index]"
-              [placeholder]="placeholderExercicios ? (placeholderExercicios!.pesoKgBiset1[$index] || 0) : 0"
+              [placeholder]="placeholderExercicios ? ((placeholderExercicios!.pesoKgBiset1 ? placeholderExercicios!.pesoKgBiset1[$index] : 0) || 0) : 0"
               (focus)="InputPesoKgBiset1.select()" (change)="cardChange = true">
           </div>
           <div class="flex qtdRep">
             <label [for]="'qtdRepBiset1' + $index">Qtd. Rep:</label>
             <input #InputQtdRepBiset1 [id]="'qtdRepBiset1' + $index" type="number"
               [(ngModel)]="exercicio.qtdRepBiset1[$index]"
-              [placeholder]="placeholderExercicios ? (placeholderExercicios!.qtdRepBiset1[$index] || 0) : 0"
+              [placeholder]="placeholderExercicios ? ((placeholderExercicios!.qtdRepBiset1 ? placeholderExercicios!.qtdRepBiset1[$index] : 0) || 0) : 0"
               (focus)="InputQtdRepBiset1.select()" (change)="cardChange = true">
           </div>
         </div>
@@ -82,14 +82,14 @@
             <label [for]="'pesoKgBiset2' + $index">Peso (Kg):</label>
             <input #InputPesoKgBiset2 [id]="'pesoKgBiset2' + $index" type="number"
               [(ngModel)]="exercicio.pesoKgBiset2[$index]"
-              [placeholder]="placeholderExercicios ? (placeholderExercicios!.pesoKgBiset2[$index] || 0) : 0"
+              [placeholder]="placeholderExercicios ? ((placeholderExercicios!.pesoKgBiset2 ? placeholderExercicios!.pesoKgBiset2[$index] : 0) || 0) : 0"
               (focus)="InputPesoKgBiset2.select()" (change)="cardChange = true">
           </div>
           <div class="flex qtdRep">
             <label [for]="'qtdRepBiset2' + $index">Qtd. Rep:</label>
             <input #InputQtdRepBiset2 [id]="'qtdRepBiset2' + $index" type="number"
               [(ngModel)]="exercicio.qtdRepBiset2[$index]"
-              [placeholder]="placeholderExercicios ? (placeholderExercicios!.qtdRepBiset2[$index] || 0) : 0"
+              [placeholder]="placeholderExercicios ? ((placeholderExercicios!.qtdRepBiset2 ? placeholderExercicios!.qtdRepBiset2[$index] : 0) || 0) : 0"
               (focus)="InputQtdRepBiset2.select()" (change)="cardChange = true">
           </div>
         </div>
