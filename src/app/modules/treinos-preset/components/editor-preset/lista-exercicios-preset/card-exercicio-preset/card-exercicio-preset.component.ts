@@ -83,7 +83,7 @@ export class CardExercicioPresetComponent implements OnInit {
 
     this.formulario.get('tpExercicio')?.valueChanges.subscribe(value => {
       this.tpExercicio = value;
-      if (!this.exercicioPreset?.id) this.adicionarCamposDinamicosDropset();
+      this.adicionarCamposDinamicosDropset();
     });
     this.formulario.get('qtdSerie')?.valueChanges.subscribe(value => {
       this.qtdSerie = value;
