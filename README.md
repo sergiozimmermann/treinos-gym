@@ -5,7 +5,7 @@ Bugs:
 
 
 Implementações:
-checkbox para "biset", "dropset" e talvez "unilateral"... "biset" insere 2 exercicios como se fossem 1 só. "dropset" permite adicionar um número de "sub-séries" para cada série.
+
 
 mudar ícone do app capacitor
 

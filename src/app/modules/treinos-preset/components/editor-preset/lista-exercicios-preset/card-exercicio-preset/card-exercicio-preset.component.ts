@@ -11,12 +11,12 @@ import { TipoExercicio } from '../../../../../../Utils/Enum/TipoExercicio.enum';
 export class CardExercicioPresetComponent implements OnInit {
 
   formulario!: FormGroup;
-  FormArray = FormArray;
 
   cardChange: boolean = false;
 
   tpExercicio: number = 1;
-  qtdSerie: number = 1;
+  qtdSerie: number = 3;
+  qtdDrop: number = 3;
 
   _exercicioPreset!: ExercicioPreset;
   get exercicioPreset(): ExercicioPreset {
@@ -26,6 +26,18 @@ export class CardExercicioPresetComponent implements OnInit {
     this._exercicioPreset = exercicioPreset;
     if (exercicioPreset && exercicioPreset.id) {
       this.formulario.patchValue(exercicioPreset);
+
+      // Map para adicionar os valores das reps do dropset no formulário
+      if (exercicioPreset.tpExercicio === TipoExercicio.DROPSET) {
+        exercicioPreset.minRepsDrop?.map(rep => {
+          (this.formulario.get('minRepsDrop') as FormArray).push(this.formBuilder.control(rep));
+        });
+        exercicioPreset.maxRepsDrop?.map(rep => {
+          (this.formulario.get('maxRepsDrop') as FormArray).push(this.formBuilder.control(rep));
+        });
+      }
+
+      this.adicionarCamposDinamicosDropset();
     }
   }
 
@@ -52,23 +64,33 @@ export class CardExercicioPresetComponent implements OnInit {
       , nmExercicio: ['']
       , obsExercicio: ['']
       , tpExercicio: [1]
-      , qtdSerie: []
+      , qtdSerie: [3]
       , minRep: []
       , maxRep: []
+      , indexExPreset: []
+      // Biset
       , nmSet1: []
       , minRepBiset1: []
       , maxRepBiset1: []
       , nmSet2: []
       , minRepBiset2: []
       , maxRepBiset2: []
-      , indexExPreset: []
+      // Dropset
+      , qtdDrop: [3]
+      , minRepsDrop: formBuilder.array([])
+      , maxRepsDrop: formBuilder.array([])
     });
 
     this.formulario.get('tpExercicio')?.valueChanges.subscribe(value => {
       this.tpExercicio = value;
+      this.adicionarCamposDinamicosDropset();
     });
     this.formulario.get('qtdSerie')?.valueChanges.subscribe(value => {
       this.qtdSerie = value;
+    });
+    this.formulario.get('qtdDrop')?.valueChanges.subscribe(value => {
+      this.qtdDrop = value;
+      if (!this.exercicioPreset?.id) this.adicionarCamposDinamicosDropset();
     });
   }
 
@@ -84,41 +106,30 @@ export class CardExercicioPresetComponent implements OnInit {
     return Array.from({ length: value }, (_, index) => index + 1);
   }
 
-  // adicionarCamposDinamicosBiset() {
-  //   // Função para controlar a quantidade de séries do biset
+  adicionarCamposDinamicosDropset() {
+    // Função para controlar a quantidade de séries do Dropset
+    const form = this.formulario.getRawValue();
+    if (form.tpExercicio !== TipoExercicio.DROPSET || !form.qtdDrop) return;
 
-  //   if (this.tpExercicio !== TipoExercicio.BISET) return;
-  //   const qtdSerie = this.formulario.get('qtdSerie')?.value;
-  //   if (!qtdSerie) return;
+    const minRepsDrop = this.formulario.get('minRepsDrop') as FormArray;
+    const maxRepsDrop = this.formulario.get('maxRepsDrop') as FormArray;
 
-  //   if (this.formulario.get('minRepBiset1') instanceof FormArray &&
-  //     this.formulario.get('maxRepBiset1') instanceof FormArray) {
-  //     const minRepBisetArray1 = this.formulario.get('minRepBiset1') as FormArray;
-  //     const maxRepBisetArray1 = this.formulario.get('maxRepBiset1') as FormArray;
-  //     const minRepBisetArray2 = this.formulario.get('minRepBiset2') as FormArray;
-  //     const maxRepBisetArray2 = this.formulario.get('maxRepBiset2') as FormArray;
+    const novosDrops = form.qtdDrop - form.minRepsDrop.length;
 
-  //     const novasSeries = qtdSerie - (this.formulario.get('minRepBiset1') as FormArray).controls.length;
+    if (novosDrops > 0) {
+      for (let i = 0; i < novosDrops; i++) {
+        minRepsDrop.push(this.formBuilder.control(0));
+        maxRepsDrop.push(this.formBuilder.control(0));
+      }
+    }
+    else {
+      (this.formulario.get('minRepsDrop') as FormArray).controls.splice(form.qtdDrop);
+      (this.formulario.get('maxRepsDrop') as FormArray).controls.splice(form.qtdDrop);
+    }
+  }
 
-  //     if (novasSeries > 0) {
-  //       for (let i = 0; i < novasSeries; i++) {
-  //         minRepBisetArray1.push(this.formBuilder.control(0));
-  //         maxRepBisetArray1.push(this.formBuilder.control(0));
-  //         minRepBisetArray2.push(this.formBuilder.control(0));
-  //         maxRepBisetArray2.push(this.formBuilder.control(0));
-  //       }
-  //     }
-  //     else {
-  //       (this.formulario.get('minRepBiset1') as FormArray).controls.splice(qtdSerie);
-  //       (this.formulario.get('maxRepBiset1') as FormArray).controls.splice(qtdSerie);
-  //       (this.formulario.get('minRepBiset2') as FormArray).controls.splice(qtdSerie);
-  //       (this.formulario.get('maxRepBiset2') as FormArray).controls.splice(qtdSerie);
-  //     }
-  //   }
-  // }
-
-  // getControls(control: string) {
-  //   return (this.formulario.get(control) as FormArray).controls;
-  // }
+  getControls(control: string) {
+    return (this.formulario.get(control) as FormArray).controls;
+  }
 
 }

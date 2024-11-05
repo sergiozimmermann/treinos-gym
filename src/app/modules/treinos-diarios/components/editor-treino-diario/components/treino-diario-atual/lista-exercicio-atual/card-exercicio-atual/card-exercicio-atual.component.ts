@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ExercicioTreinoAtual } from '../../../../../../models/ExercicioTreinoAtual';
+import { TipoExercicio } from '../../../../../../../../Utils/Enum/TipoExercicio.enum';
 
 @Component({
   selector: 'app-card-exercicio-atual',
@@ -24,6 +25,9 @@ export class CardExercicioAtualComponent implements OnInit {
     return this._exercicio;
   }
   @Input() set exercicio(exercicio: ExercicioTreinoAtual) {
+    if (exercicio && !exercicio.id && exercicio.tpExercicio === TipoExercicio.DROPSET) {
+      this.montaArrays(exercicio);
+    }
     this._exercicio = exercicio;
     if (exercicio && this.exerciciosUltimoTreino && this.exerciciosUltimoTreino.length > 0) {
       this.placeholderExercicios = this.exerciciosUltimoTreino.find(ex => ex.idExercicioPreset === exercicio.idExercicioPreset);
@@ -43,6 +47,11 @@ export class CardExercicioAtualComponent implements OnInit {
 
   onChangeInputs() {
     this.cardChange = true;
+  }
+
+  montaArrays(exercicio: any) {
+    exercicio.pesoKgDrops = new Array(exercicio.qtdSerie).fill([]).map(() => new Array(exercicio.qtdDrop));
+    exercicio.qtdRepDrops = new Array(exercicio.qtdSerie).fill([]).map(() => new Array(exercicio.qtdDrop));
   }
 
 }

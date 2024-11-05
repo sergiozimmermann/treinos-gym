@@ -49,17 +49,19 @@ export class TreinosDiariosService {
   }
 
   getExerciciosTreino(idTreino: string): Observable<any> {
-    return this.afs.collection('Exercicios_Diarios', ref => ref.where('idTreino', '==', idTreino)).snapshotChanges();
+    return this.afs.collection('Exercicios_Diarios', ref => ref.where('idTreino', '==', idTreino).orderBy('indexExPreset')).snapshotChanges();
   }
 
   getExerciciosUltimoTreino(idTreinoPreset: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.afs.collection('Treinos_Diarios', ref => ref.where('idTreinoPreset', '==', idTreinoPreset).orderBy('dtTreino', 'desc').limit(1)).get().subscribe(res => {
         // Verifica se existe o treino
-        if (res.docs.length === 0) resolve(false);
+        if (res.docs.length === 0) {
+          return resolve(false);
+        }
 
         const idUltimoTreino = res.docs[0].id;
-        this.afs.collection('Exercicios_Diarios', ref => ref.where('idTreino', '==', idUltimoTreino)).snapshotChanges().subscribe(ultimosExercicios => resolve(ultimosExercicios));
+        this.afs.collection('Exercicios_Diarios', ref => ref.where('idTreino', '==', idUltimoTreino).orderBy('indexExPreset')).snapshotChanges().subscribe(ultimosExercicios => resolve(ultimosExercicios));
       }, error => reject(error));
     });
   }

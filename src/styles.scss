@@ -135,6 +135,7 @@ input[type="text"] {
 }
 
 input[type="number"] {
+    text-align: right;
     font-size: 22px;
     background-color: var(--button-color);
     color: var(--font-color);

@@ -5,26 +5,133 @@
   <div class="obsExercicio">
     <span>Obs: {{exercicio.obsExercicio}}</span>
   </div>
-  <div class="flex justify-content-end rangeRep">
-    <label>Range Rep: </label>
-    <span style="width: 95px; text-align: end;">{{exercicio.minMaxRep}}</span>
-  </div>
-  <div class="pesoAndRep flex flex-column">
-    @for (item of getRange(exercicio.qtdSerie); track $index) {
-    <div class="flex inputsExercicio">
-      <div class="flex pesoKg">
-        <label [for]="'pesoKg' + $index">Peso (Kg):</label>
-        <input #InputPesoKg [id]="'pesoKg' + $index" type="number" [(ngModel)]="exercicio.pesoKg[$index]"
-          [placeholder]="placeholderExercicios!.pesoKg[$index] || 0" (focus)="InputPesoKg.select()"
-          (change)="cardChange = true">
+
+  <!-- NORMAL -->
+  <ng-container *ngIf="exercicio.tpExercicio === 1">
+    <div class="flex justify-content-end rangeRep">
+      <label>Range Rep: </label>
+      <span style="width: 95px; text-align: end;">{{exercicio.minMaxRep}}</span>
+    </div>
+    <div class="pesoAndRep flex flex-column">
+      @for (item of getRange(exercicio.qtdSerie); track $index) {
+      <div class="flex inputsExercicio">
+        <div class="flex pesoKg">
+          <label [for]="'pesoKg' + $index">Peso (Kg):</label>
+          <input #InputPesoKg [id]="'pesoKg' + $index" type="number" [(ngModel)]="exercicio.pesoKg[$index]"
+            [placeholder]="placeholderExercicios ? ((placeholderExercicios!.pesoKg ? placeholderExercicios!.pesoKg[$index] : 0) || 0) : 0"
+            (focus)="InputPesoKg.select()" (change)="cardChange = true">
+        </div>
+        <div class="flex qtdRep">
+          <label [for]="'qtdRep' + $index">Qtd. Rep:</label>
+          <input #InputQtdRep [id]="'qtdRep' + $index" type="number" [(ngModel)]="exercicio.qtdRep[$index]"
+            [placeholder]="placeholderExercicios ? ((placeholderExercicios!.qtdRep ? placeholderExercicios!.qtdRep[$index] : 0) || 0) : 0"
+            (focus)="InputQtdRep.select()" (change)="cardChange = true">
+        </div>
       </div>
-      <div class="flex qtdRep">
-        <label [for]="'qtdRep' + $index">Qtd. Rep:</label>
-        <input #InputQtdRep [id]="'qtdRep' + $index" type="number" [(ngModel)]="exercicio.qtdRep[$index]"
-          [placeholder]="placeholderExercicios!.qtdRep[$index] || 0" (focus)="InputQtdRep.select()"
-          (change)="cardChange = true">
+      }
+    </div>
+  </ng-container>
+
+  <!-- BISET -->
+  <ng-container *ngIf="exercicio.tpExercicio === 2">
+    <div class="flex justify-content-center" style="font-size: 22px; margin: 10px 0;">
+      <span>Biset</span>
+    </div>
+    <div class="flex justify-content-center">
+      <span class="border-title">{{exercicio.nmSet1}}</span>
+    </div>
+    <div class="form-group border" style="row-gap: 5px; margin-bottom: 10px;">
+      <div class="flex justify-content-end rangeRep">
+        <label>Range Rep: </label>
+        <span style="width: 95px; text-align: end;">{{exercicio.minMaxRepBiset1}}</span>
+      </div>
+      <div class="pesoAndRep flex flex-column">
+        @for (item of getRange(exercicio.qtdSerie); track $index) {
+        <div class="flex inputsExercicio">
+          <div class="flex pesoKg">
+            <label [for]="'pesoKgBiset1' + $index">Peso (Kg):</label>
+            <input #InputPesoKgBiset1 [id]="'pesoKgBiset1' + $index" type="number"
+              [(ngModel)]="exercicio.pesoKgBiset1[$index]"
+              [placeholder]="placeholderExercicios ? ((placeholderExercicios!.pesoKgBiset1 ? placeholderExercicios!.pesoKgBiset1[$index] : 0) || 0) : 0"
+              (focus)="InputPesoKgBiset1.select()" (change)="cardChange = true">
+          </div>
+          <div class="flex qtdRep">
+            <label [for]="'qtdRepBiset1' + $index">Qtd. Rep:</label>
+            <input #InputQtdRepBiset1 [id]="'qtdRepBiset1' + $index" type="number"
+              [(ngModel)]="exercicio.qtdRepBiset1[$index]"
+              [placeholder]="placeholderExercicios ? ((placeholderExercicios!.qtdRepBiset1 ? placeholderExercicios!.qtdRepBiset1[$index] : 0) || 0) : 0"
+              (focus)="InputQtdRepBiset1.select()" (change)="cardChange = true">
+          </div>
+        </div>
+        }
       </div>
     </div>
-    }
-  </div>
+
+    <div class="flex justify-content-center">
+      <span class="border-title">{{exercicio.nmSet2}}</span>
+    </div>
+    <div class="form-group border" style="row-gap: 5px;">
+      <div class="flex justify-content-end rangeRep">
+        <label>Range Rep: </label>
+        <span style="width: 95px; text-align: end;">{{exercicio.minMaxRepBiset2}}</span>
+      </div>
+      <div class="pesoAndRep flex flex-column">
+        @for (item of getRange(exercicio.qtdSerie); track $index) {
+        <div class="flex inputsExercicio">
+          <div class="flex pesoKg">
+            <label [for]="'pesoKgBiset2' + $index">Peso (Kg):</label>
+            <input #InputPesoKgBiset2 [id]="'pesoKgBiset2' + $index" type="number"
+              [(ngModel)]="exercicio.pesoKgBiset2[$index]"
+              [placeholder]="placeholderExercicios ? ((placeholderExercicios!.pesoKgBiset2 ? placeholderExercicios!.pesoKgBiset2[$index] : 0) || 0) : 0"
+              (focus)="InputPesoKgBiset2.select()" (change)="cardChange = true">
+          </div>
+          <div class="flex qtdRep">
+            <label [for]="'qtdRepBiset2' + $index">Qtd. Rep:</label>
+            <input #InputQtdRepBiset2 [id]="'qtdRepBiset2' + $index" type="number"
+              [(ngModel)]="exercicio.qtdRepBiset2[$index]"
+              [placeholder]="placeholderExercicios ? ((placeholderExercicios!.qtdRepBiset2 ? placeholderExercicios!.qtdRepBiset2[$index] : 0) || 0) : 0"
+              (focus)="InputQtdRepBiset2.select()" (change)="cardChange = true">
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- DROPSET -->
+  <ng-container *ngIf="exercicio.tpExercicio === 3">
+    <div class="form-group" style="margin-top: 10px; row-gap: 10px;">
+      <div *ngFor="let item of getRange(exercicio.qtdSerie); index as i">
+        <div class="flex justify-content-center" style="margin-bottom: 10px;">
+          <span class="border-title">{{i + 1}}ª Série</span>
+        </div>
+        <div class="form-group border" style="row-gap: 5px;">
+          <div class="form-group border" *ngFor="let drop of getRange(exercicio.qtdDrop); index as iD">
+            <div class="flex justify-content-end">
+              <span>Range Rep: {{exercicio.minMaxRepDrops[iD]}}</span>
+            </div>
+            <div class="flex align-items-end" style="column-gap: 10px;">
+              <div class="drop-span">
+                <span>Drop {{iD + 1}}: </span>
+              </div>
+              <div>
+                <label for="'pesoKgDrops'{{i}}{{iD}}">Peso (Kg):</label>
+                <input #InputPesoKgDrops id="''pesoKgDrops'{{i}}{{iD}}'" type="number" style="margin: 0;"
+                  [(ngModel)]="exercicio.pesoKgDrops[i][iD]"
+                  [placeholder]="placeholderExercicios ? ((placeholderExercicios!.pesoKgDrops[i] && placeholderExercicios!.pesoKgDrops[i][iD] ? placeholderExercicios!.pesoKgDrops[i][iD] : 0) || 0) : 0"
+                  (focus)="InputPesoKgDrops.select()" (change)="cardChange = true">
+              </div>
+              <div>
+                <label for="'qtdRepDrops{{i}}{{iD}}'">Qtd. Rep:</label>
+                <input #InputQtdRepDrops id="'qtdRepDrops{{i}}{{iD}}'" type="number" style="margin: 0;"
+                  [(ngModel)]="exercicio.qtdRepDrops[i][iD]"
+                  [placeholder]="placeholderExercicios ? ((placeholderExercicios!.qtdRepDrops[i] && placeholderExercicios!.qtdRepDrops[i][iD] ? placeholderExercicios.qtdRepDrops[i][iD] : 0) || 0) : 0"
+                  (focus)="InputQtdRepDrops.select()" (change)="cardChange = true">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
 </div>
